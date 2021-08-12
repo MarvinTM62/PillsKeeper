@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PillsKeeper</string>
+    <string name="gestisci_farmaci">Gestisci Farmaci</string>
 </resources>
