@@ -79,6 +79,7 @@
                 <TextView
                     android:layout_width="109dp"
                     android:layout_height="28dp"
+                    android:fontFamily="@font/viga"
                     android:gravity="center"
                     android:text="Inventario"
                     android:textSize="15sp"
@@ -113,6 +114,7 @@
                     android:layout_height="28dp"
                     android:gravity="center"
                     android:text="Reminder"
+                    android:fontFamily="@font/viga"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -145,6 +147,7 @@
                     android:layout_height="28dp"
                     android:gravity="center"
                     android:text="Contatti"
+                    android:fontFamily="@font/viga"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -170,14 +173,15 @@
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_margin="8dp"
-                    android:src="@drawable/reminder_farmaco" />
+                    android:src="@drawable/googlemaps_icon" />
 
                 <TextView
-                    android:layout_width="109dp"
+                    android:layout_width="110dp"
                     android:layout_height="28dp"
                     android:gravity="center"
-                    android:text="Reminder"
-                    android:textSize="15sp"
+                    android:text="Trova farmacie"
+                    android:fontFamily="@font/viga"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
 
