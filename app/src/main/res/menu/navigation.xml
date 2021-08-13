@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menunav"
+        android:icon="@drawable/ic_menu"
+        android:title="Home" />
+
+    <item android:id="@+id/emailmenu"
+        android:icon="@drawable/ic_email"
+        android:title="Email" />
+
+    <item android:id="@+id/menusettings"
+        android:icon="@drawable/ic_settings"
+        android:title="Impostazioni" />
+
+
+</menu>
