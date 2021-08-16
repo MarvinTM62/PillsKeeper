@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +47,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutInv"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginTop="30dp"
@@ -78,6 +80,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutNotify"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginStart="10dp"
@@ -111,6 +114,7 @@
 
             <LinearLayout
                 android:id="@+id/layoutContact"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginTop="30dp"
@@ -144,12 +148,12 @@
 
             <LinearLayout
                 android:id="@+id/layoutMap"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
@@ -175,7 +179,9 @@
                     android:textStyle="bold" />
 
 
+
             </LinearLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
