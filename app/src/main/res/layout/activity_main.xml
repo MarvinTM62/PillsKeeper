@@ -149,13 +149,15 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
+                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
                 app:layout_constraintDimensionRatio="H, 1:1"
-                app:layout_constraintStart_toEndOf="@+id/layoutInv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/layoutInv"
                 app:layout_constraintTop_toBottomOf="@+id/layoutNotify">
+
 
                 <ImageView
                     android:layout_width="65dp"
@@ -166,9 +168,9 @@
                 <TextView
                     android:layout_width="110dp"
                     android:layout_height="28dp"
+                    android:fontFamily="@font/viga"
                     android:gravity="center"
                     android:text="Trova farmacie"
-                    android:fontFamily="@font/viga"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
