@@ -68,7 +68,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun placeMarkerOnMap(currentLatLng: LatLng) {
         val markerOptions = MarkerOptions().position(currentLatLng)
-        markerOptions.title("CurrentLatLong")
+        markerOptions.title("Posizione attuale")
         mMap.addMarker(markerOptions)
     }
 
