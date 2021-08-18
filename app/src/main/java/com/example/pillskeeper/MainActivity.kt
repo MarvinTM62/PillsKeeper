@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openGoogleMapsActivity() {
-        val intent: Intent = Intent(this, GoogleMapsActivity::class.java)
+        val intent: Intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
 }
