@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "891781519203",
+    "firebase_url": "https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "pillskeeper-7e7aa",
+    "storage_bucket": "pillskeeper-7e7aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891781519203:android:e7cbcec9d4addcaf216556",
+        "android_client_info": {
+          "package_name": "com.example.pillskeeper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891781519203-f2f8gatmjuch36ck67mieojqdj4kvl09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3jgJvcCOxdw3WizftTiV6KC30nJSb7oc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891781519203-f2f8gatmjuch36ck67mieojqdj4kvl09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

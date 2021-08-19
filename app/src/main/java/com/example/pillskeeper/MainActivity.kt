@@ -8,6 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +18,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        // Write a message to the database
+        val database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
+        val myRef = database.getReference("user")
+
+        var moment:Pill = Pill("moment", "immagine")
+        myRef.child("davide").push().setValue(moment)
 
         val buttonLayoutInv: LinearLayout = findViewById(R.id.layoutInv)
         val buttonLayoutNotify: LinearLayout = findViewById(R.id.layoutNotify)
