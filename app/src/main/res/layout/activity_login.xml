@@ -10,12 +10,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
-            android:layout_weight="4"
-            android:src="@drawable/ic_login"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_login"
+            android:tint="#02A2DD" />
         <View
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -64,13 +66,14 @@
             android:textSize="17sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="Accedi"
-            android:textColor="#FFFDFD" />
+            android:textColor="#FFFDFD"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
