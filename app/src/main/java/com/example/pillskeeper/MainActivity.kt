@@ -23,17 +23,18 @@ class MainActivity : AppCompatActivity() {
         val database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         val myRef = database.getReference("user")
 
-        var moment:Pill = Pill("moment", "immagine")
-        myRef.child("davide").push().setValue(moment)
+        //var moment:Pill = Pill("moment", "immagine")
+        //myRef.child("davide").push().setValue(moment)
 
         val buttonLayoutInv: LinearLayout = findViewById(R.id.layoutInv)
         val buttonLayoutNotify: LinearLayout = findViewById(R.id.layoutNotify)
         val buttonLayoutContact: LinearLayout = findViewById(R.id.layoutContact)
         val buttonLayoutMap: LinearLayout = findViewById(R.id.layoutMap)
 
+
         buttonLayoutInv.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                println("Bottone 1")
+                setContentView(R.layout.activity_login)
             }
 
 
@@ -73,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         val intent: Intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
+
 
 
 }

@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
         <ImageView
             android:layout_weight="4"
-            android:src="@drawable/ic_login"
+            android:src="@drawable/ic_register"
             android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="0dp" />
@@ -34,7 +34,7 @@
             android:textStyle="bold"
             android:textSize="40sp"
             android:textColor="#fff"
-            android:text="Login"
+            android:text="Sign in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -43,11 +43,11 @@
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
-            android:hint="Email"
+            android:hint="Username"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:textColor="#353535"
-            android:textColorHint="#B1A6A6"
+            android:textColorHint="#AB9FC1"
             android:textSize="17sp" />
 
         <EditText
@@ -55,21 +55,35 @@
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
-            android:hint="Password"
+            android:hint="Inserisci password"
             android:inputType="textPassword"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:textColor="#353535"
-            android:textColorHint="#B1A6A6"
+            android:textColorHint="#AB9FC1"
             android:textSize="17sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_margin="20dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="Conferma password"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:textColor="#353535"
+            android:textColorHint="#AB9FC1"
+            android:textSize="17sp" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/button_reg"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="Accedi"
+            android:text="Registrati"
             android:textColor="#FFFDFD" />
 
     </LinearLayout>
