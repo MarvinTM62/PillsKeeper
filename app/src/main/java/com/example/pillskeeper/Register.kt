@@ -1,5 +1,6 @@
 package com.example.pillskeeper
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,11 +13,13 @@ import com.google.firebase.ktx.Firebase
 
 class Register : AppCompatActivity() {
 
+    var username : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        var username: String
+
         var password1: String
         var password2: String
 
@@ -52,6 +55,9 @@ class Register : AppCompatActivity() {
                                 password1Text.text.clear()
                                 password2Text.text.clear()
                                 Toast.makeText(this@Register,"Registrazione avvenuta con successo!",Toast. LENGTH_SHORT).show()
+                                var intent: Intent = Intent()
+                                intent.putExtra("usernameResult", username)
+                                setResult(RESULT_OK, intent)
                             }
                         }
 
@@ -63,5 +69,6 @@ class Register : AppCompatActivity() {
             }
         })
     }
+
 
 }
