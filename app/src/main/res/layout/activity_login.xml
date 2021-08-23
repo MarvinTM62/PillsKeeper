@@ -39,10 +39,12 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/loginusername"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
+            android:singleLine="true"
             android:hint="Email"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
@@ -51,6 +53,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/loginpassword"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
@@ -64,6 +67,7 @@
             android:textSize="17sp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/accediButton"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/custom_button"

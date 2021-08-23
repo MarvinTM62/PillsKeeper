@@ -39,9 +39,11 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
+            android:singleLine="true"
             android:background="@drawable/rounded_corner"
             android:hint="Username"
             android:paddingStart="10dp"
@@ -51,6 +53,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/password1"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
@@ -64,6 +67,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/password2"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
@@ -78,6 +82,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signButton"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/button_reg"
