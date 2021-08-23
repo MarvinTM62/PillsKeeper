@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/topbackground"
-        android:backgroundTint="#049DD6"
+        android:backgroundTint="#03A9F4"
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
 
