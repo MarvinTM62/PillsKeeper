@@ -28,48 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        // Write a message to the database
-        val database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
-        val myRef = database.getReference("user")
-
-        //var moment:Pill = Pill("moment", "immagine")
-        //myRef.child("davide").push().setValue(moment)
-        myRef.child("davide").child("pills").child("momentact").setValue(Pill("momentact", "immagine"))
-
-        myRef.addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.hasChild("davide"))
-                    println("ESATTOOOOOOOOOOO")
-                else
-                    println("MA CHE STAI A DI'")
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-
-        myRef.child("davide").child("pills").child("momentact").addListenerForSingleValueEvent(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()) {
-                    var sd: String = (snapshot.getValue().toString())
-                    sd = sd.substring(1, sd.length-1)
-                    println(sd)
-
-                    // for(snapshot2 in snapshot.children())
-
-
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-
-
-
         val buttonLayoutInv: LinearLayout = findViewById(R.id.layoutInv)
         val buttonLayoutNotify: LinearLayout = findViewById(R.id.layoutNotify)
         val buttonLayoutContact: LinearLayout = findViewById(R.id.layoutContact)
@@ -79,23 +37,15 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId) {
-                    R.id.menunav -> println(1)
-                    R.id.emailmenu -> println(2)
-                    R.id.menusettings -> println(3)
+                    R.id.menunav -> setContentView(R.layout.activity_main)
+                    R.id.emailmenu -> openLoginActivity()
+                    R.id.menusettings -> openRegisterActivity()
                 }
                 return true
             }
         })
 
 
-
-        /* buttonSettings.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                setContentView(R.layout.activity_login)
-            }
-
-
-        }) */
 
         buttonLayoutInv.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
@@ -137,6 +87,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun openGoogleMapsActivity() {
         val intent: Intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openLoginActivity() {
+        val intent: Intent = Intent(this, Login::class.java)
+        startActivityForResult(intent, 1)
+    }
+
+    private fun openRegisterActivity() {
+        val intent: Intent = Intent(this, Register::class.java)
         startActivity(intent)
     }
 
