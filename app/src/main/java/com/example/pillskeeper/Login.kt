@@ -1,5 +1,6 @@
 package com.example.pillskeeper
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -48,6 +49,9 @@ class Login : AppCompatActivity() {
                                     Toast.makeText(this@Login,"La password è errata", Toast.LENGTH_SHORT).show()
                                     passwordText.text.clear()
                                 } else {
+                                    var intent: Intent = Intent()
+                                    intent.putExtra("usernameResult", username)
+                                    setResult(RESULT_OK, intent)
                                     finish()
                                 }
                             }

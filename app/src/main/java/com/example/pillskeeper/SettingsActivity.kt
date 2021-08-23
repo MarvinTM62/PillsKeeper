@@ -17,6 +17,7 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var buttonLogin: Button
     lateinit var buttonAccedi: Button
     val REGISTER_ACTIVITY_REQUEST_CODE = 1
+    val LOGIN_ACTIVITY_REQUEST_CODE = 2
     var username: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,13 +67,12 @@ class SettingsActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REGISTER_ACTIVITY_REQUEST_CODE){
+        if (requestCode == REGISTER_ACTIVITY_REQUEST_CODE || requestCode == LOGIN_ACTIVITY_REQUEST_CODE){
             if (resultCode == RESULT_OK){
                 if (data != null) {
                     username = data.getStringExtra("usernameResult")
                 }
             }
-
         }
        if (username != ""){
            usernameView.setText(username)
