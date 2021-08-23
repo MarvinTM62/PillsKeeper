@@ -10,12 +10,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
-            android:layout_weight="4"
-            android:src="@drawable/ic_register"
-            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_register" />
         <View
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -56,6 +57,7 @@
             android:id="@+id/password1"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            android:singleLine="true"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
             android:hint="Inserisci password"

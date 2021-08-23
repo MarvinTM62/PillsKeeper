@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         })
         buttonLayoutNotify.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                openReminderActivity()
                 println("Bottone 2")
             }
         })
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openGoogleMapsActivity() {
-        val intent = Intent(this, MapsActivity::class.java)
+        val intent: Intent = Intent(this, MapsActivity::class.java)
         startActivity(intent)
     }
 
@@ -98,11 +97,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun openRegisterActivity() {
         val intent: Intent = Intent(this, Register::class.java)
-        startActivity(intent)
-    }
-
-    private fun openReminderActivity() {
-        val intent: Intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
     }
 
