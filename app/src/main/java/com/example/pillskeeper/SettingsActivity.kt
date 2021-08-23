@@ -35,10 +35,10 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
 
-        TextView = findViewById(R.id.usernameTextView)
-         buttonRegister: Button = findViewById(R.id.registratiButtonSettings)
-         buttonLogin: Button = findViewById(R.id.loginButtonSettings)
-         buttonAccedi: Button = findViewById(R.id.accediEmailSettingsButton)
+        usernameView = findViewById(R.id.usernameTextView)
+        buttonRegister = findViewById(R.id.registratiButtonSettings)
+        buttonLogin = findViewById(R.id.loginButtonSettings)
+        buttonAccedi = findViewById(R.id.accediEmailSettingsButton)
 
 
 
