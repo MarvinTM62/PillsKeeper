@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         })
         buttonLayoutNotify.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                println("Bottone 2")
+                openReminderActivity()
             }
         })
         buttonLayoutContact.setOnClickListener(object : View.OnClickListener {
@@ -99,6 +99,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun openSettingsActivity() {
         val intent: Intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openReminderActivity() {
+        val intent: Intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
     }
 
