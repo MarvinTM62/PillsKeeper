@@ -10,14 +10,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
             android:layout_weight="4"
-            android:scaleType="centerCrop"
             android:src="@drawable/ic_login"
-            android:tint="#02A2DD" />
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
         <View
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -41,10 +39,12 @@
             android:layout_height="wrap_content" />
 
         <EditText
+            android:id="@+id/loginusername"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
+            android:singleLine="true"
             android:hint="Email"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
@@ -53,6 +53,7 @@
             android:textSize="17sp" />
 
         <EditText
+            android:id="@+id/loginpassword"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             android:layout_margin="20dp"
@@ -66,14 +67,14 @@
             android:textSize="17sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/accediButton"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
             android:background="@drawable/custom_button"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="Accedi"
-            android:textColor="#FFFDFD"
-            android:textSize="16sp" />
+            android:textColor="#FFFDFD" />
 
     </LinearLayout>
 

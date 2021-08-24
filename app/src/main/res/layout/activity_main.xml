@@ -8,13 +8,13 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutOnTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/topbackground"
-        android:backgroundTint="#03A9F4"
+    android:id="@+id/layoutOnTop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/topbackground"
         android:padding="10dp"
         app:layout_constraintTop_toTopOf="parent">
+
 
 
         <ImageView
@@ -27,6 +27,8 @@
         </ImageView>
 
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
@@ -35,9 +37,7 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutOnTop"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintTop_toBottomOf="@+id/layoutOnTop">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutHome"
@@ -47,11 +47,11 @@
 
             <LinearLayout
                 android:id="@+id/layoutInv"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
@@ -80,18 +80,18 @@
 
             <LinearLayout
                 android:id="@+id/layoutNotify"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
                 app:layout_constraintDimensionRatio="H, 1:1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/layoutInv"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -103,9 +103,9 @@
                 <TextView
                     android:layout_width="109dp"
                     android:layout_height="28dp"
-                    android:fontFamily="@font/viga"
                     android:gravity="center"
                     android:text="Reminder"
+                    android:fontFamily="@font/viga"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -114,11 +114,11 @@
 
             <LinearLayout
                 android:id="@+id/layoutContact"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
@@ -137,9 +137,9 @@
                 <TextView
                     android:layout_width="109dp"
                     android:layout_height="28dp"
-                    android:fontFamily="@font/viga"
                     android:gravity="center"
                     android:text="Contatti"
+                    android:fontFamily="@font/viga"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -148,12 +148,12 @@
 
             <LinearLayout
                 android:id="@+id/layoutMap"
+                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/cube_background"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
@@ -179,7 +179,9 @@
                     android:textStyle="bold" />
 
 
+
             </LinearLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,13 +13,11 @@ import com.google.firebase.ktx.Firebase
 
 class Register : AppCompatActivity() {
 
-    var username : String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-
+        var username : String = ""
         var password1: String
         var password2: String
 

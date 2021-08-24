@@ -33,13 +33,14 @@ class MainActivity : AppCompatActivity() {
         val buttonLayoutContact: LinearLayout = findViewById(R.id.layoutContact)
         val buttonLayoutMap: LinearLayout = findViewById(R.id.layoutMap)
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomMenu)
+        bottomNavigation.selectedItemId = R.id.menunav
 
         bottomNavigation.setOnNavigationItemSelectedListener(object : BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId) {
-                    R.id.menunav -> setContentView(R.layout.activity_main)
+                    R.id.menunav -> null
                     R.id.emailmenu -> openLoginActivity()
-                    R.id.menusettings -> openRegisterActivity()
+                    R.id.menusettings -> openSettingsActivity()
                 }
                 return true
             }
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         })
         buttonLayoutNotify.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                println("Bottone 2")
+                openReminderActivity()
             }
         })
         buttonLayoutContact.setOnClickListener(object : View.OnClickListener {
@@ -68,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     permissionAllert3.setIcon(R.drawable.contatti_farmaco)
                     permissionAllert3.create().show();
                 } else */
-                    println("Bottone 3")
+                println("Bottone 3")
             }
         })
         buttonLayoutMap.setOnClickListener(object : View.OnClickListener {
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                     permissionAllert4.setIcon(R.drawable.googlemaps_icon)
                     permissionAllert4.create().show();
                 } else */
-                    openGoogleMapsActivity()
+                openGoogleMapsActivity()
             }
         })
     }
@@ -95,12 +96,16 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, 1)
     }
 
-    private fun openRegisterActivity() {
-        val intent: Intent = Intent(this, Register::class.java)
+
+    private fun openSettingsActivity() {
+        val intent: Intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }
 
-
+    private fun openReminderActivity() {
+        val intent: Intent = Intent(this, ReminderActivity::class.java)
+        startActivity(intent)
+    }
 
 }
 
