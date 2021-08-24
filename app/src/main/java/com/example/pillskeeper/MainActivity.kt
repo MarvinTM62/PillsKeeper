@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonLayoutInv.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                println("bottone 1")
+                openPillsActivity()
             }
 
 
@@ -105,6 +105,11 @@ class MainActivity : AppCompatActivity() {
     private fun openReminderActivity() {
         val intent: Intent = Intent(this, ReminderActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun openPillsActivity() {
+        val intent: Intent = Intent(this, PillsActivity::class.java)
+        startActivityForResult(intent, 1)
     }
 
 }
