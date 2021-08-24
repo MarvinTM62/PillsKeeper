@@ -51,7 +51,17 @@ class SettingsActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
-               openLoginActivity()
+                if (username == ""){
+                    openLoginActivity()
+                } else {
+                    buttonLogin.setText("LOG IN")
+                    usernameView.setText("Login non effettuato")
+                    buttonRegister.visibility = View.VISIBLE
+                    buttonRegister.isEnabled = true
+                    username = ""
+                }
+
+
             }
         })
 
@@ -76,8 +86,10 @@ class SettingsActivity : AppCompatActivity() {
         }
        if (username != ""){
            usernameView.setText(username)
-           buttonRegister.visibility = View.GONE
+           buttonRegister.visibility = View.INVISIBLE
+           buttonRegister.isEnabled = false
            buttonLogin.setText("LOG OUT")
+
        }
     }
 

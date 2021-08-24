@@ -7,11 +7,12 @@
     android:background="@color/colorBackground"
     tools:context=".SettingsActivity">
 
+
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayoutSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="140dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -74,9 +75,9 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSettings"
         app:layout_constraintVertical_bias="0.053"
         tools:layout_editor_absoluteX="0dp">
 
@@ -118,7 +119,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintVertical_bias="1.0"
