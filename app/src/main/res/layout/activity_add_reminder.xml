@@ -34,33 +34,33 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/FarmacoString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Farmaco"
         android:inputType="textPersonName"
-        android:text="Farmaco"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/GiorniString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Giorni"
         android:inputType="textPersonName"
-        android:text="Giorni"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/FarmacoString" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/OraString"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Ora"
         android:inputType="textPersonName"
-        android:text="Ora"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/GiorniString" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
