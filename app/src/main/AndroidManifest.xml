@@ -20,6 +20,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PillsKeeper">
+        <activity android:name=".PillsActivity"></activity>
+        <activity
+            android:name=".AddReminderActivity"
+            android:exported="true"
+            android:label="@string/title_activity_add_reminder"
+            android:theme="@style/Theme.PillsKeeper.NoActionBar" />
         <activity
             android:name=".ReminderActivity"
             android:exported="true" />
