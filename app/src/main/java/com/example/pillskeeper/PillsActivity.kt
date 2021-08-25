@@ -25,7 +25,7 @@ class PillsActivity : AppCompatActivity() {
         myRef = database.getReference("user")
 
         var auth: FirebaseAuth = FirebaseAuth.getInstance()
-        var storageReference: StorageReference = FirebaseStorage.getInstance("gs://pillskeeper-7e7aa.appspot.com").getReference("user")
+        var storageReference: StorageReference = FirebaseStorage.getInstance().getReference("User/"+ auth.currentUser?.uid)
         var imageUri : Uri = Uri.parse("android.resource://$packageName/${R.drawable.aggiungi_farmaco}")
         storageReference.putFile(imageUri).addOnSuccessListener { Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show() }
             .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}
