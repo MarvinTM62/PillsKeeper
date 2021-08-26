@@ -12,15 +12,16 @@ class ReminderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder)
+
         val addReminderButton: View = findViewById(R.id.addReminderButton)
         val backArrowReminder: View = findViewById(R.id.backArrowReminder)
+
         addReminderButton.setOnClickListener{
-            val intentRemind: Intent = Intent(this, AddReminderActivity::class.java)
-            startActivity(intentRemind)
+            startActivity(Intent(this, AddReminderActivity::class.java))
         }
+
         backArrowReminder.setOnClickListener{
-            val intentMain: Intent = Intent(this, MainActivity::class.java)
-            startActivity(intentMain)
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
     }
