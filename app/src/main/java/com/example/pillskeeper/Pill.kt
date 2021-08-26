@@ -5,5 +5,5 @@ import android.media.Image
 
 data class Pill(
 
-    var name: String,  var image: Bitmap
+    var name: String,  var image: ByteArray
 )
