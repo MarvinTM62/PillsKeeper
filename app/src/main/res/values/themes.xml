@@ -26,4 +26,7 @@
     </style>
     <style name="Theme.PillsKeeper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.PillsKeeper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ReminderButtons" parent="Widget.MaterialComponents.Button.OutlinedButton" />
+
 </resources>

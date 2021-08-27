@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/quantitaFarmacoNotifica"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
     tools:context=".AddReminderActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -33,34 +35,147 @@
         app:layout_constraintTop_toTopOf="@+id/toolbar2"
         tools:ignore="TextContrastCheck" />
 
+    <Button
+        android:id="@+id/bottoneCreaNotifica"
+        android:layout_width="321dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Crea Notifica"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <EditText
-        android:id="@+id/FarmacoString"
+        android:id="@+id/nomeFarmacoNotificaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Farmaco"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.082" />
 
     <EditText
-        android:id="@+id/GiorniString"
+        android:id="@+id/quantitaFarmacoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Giorni"
-        android:inputType="textPersonName"
+        android:hint="Quantità da assumere"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FarmacoString" />
+        app:layout_constraintTop_toBottomOf="@+id/nomeFarmacoNotificaText"
+        app:layout_constraintVertical_bias="0.028" />
 
-    <EditText
-        android:id="@+id/OraString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ora"
-        android:inputType="textPersonName"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="192dp"
+        android:layout_height="31dp"
+        android:text="Seleziona giorni"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/materialButtonToggleGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/GiorniString" />
+        app:layout_constraintTop_toBottomOf="@+id/quantitaFarmacoText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/materialButtonToggleGroup"
+        android:layout_width="343dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="408dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonLun"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="L"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonMar"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="M"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonMer"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="M"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonGio"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="G"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonVen"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="V"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonSab"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="S"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonDom"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:text="D"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

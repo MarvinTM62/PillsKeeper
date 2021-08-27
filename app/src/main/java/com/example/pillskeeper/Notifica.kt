@@ -1,13 +1,35 @@
 package com.example.pillskeeper
 
-data class Notifica(val farmaco: String, val ora: Int, val minuto: Int){
+data class Notifica(val farmaco: String){
     private val farmacoNotifica = farmaco
-    private val oraNotifica = ora
-    private val minutoNotifica = minuto
+    private var counterFarmaco = 0
+    private var quantitaFarmaco = 0
+    private var oraNotifica = 0
+    private var minutoNotifica = 0
     private var giorniNotifica = arrayOf(false, false, false, false, false, false, false)
 
     fun getFarmacoNotifica(): String {
         return farmacoNotifica
+    }
+
+    fun setCounterFarmaco(n: Int) {
+        counterFarmaco = n
+    }
+
+    fun getQuantitaFarmaco(): Int {
+        return quantitaFarmaco
+    }
+
+    fun farmacoFinitoNotifica(): Boolean {
+        if (counterFarmaco <= 4)
+            return true
+        return false
+    }
+
+    fun removeQuantitaDaCounter(){
+       counterFarmaco -= quantitaFarmaco
+        if (counterFarmaco < 0)
+            counterFarmaco = 0
     }
 
     fun getOraNotifica(): Int {
@@ -18,27 +40,22 @@ data class Notifica(val farmaco: String, val ora: Int, val minuto: Int){
         return minutoNotifica
     }
 
-    fun setGiorniNotifica(lun: Boolean, mar: Boolean, mer: Boolean, gio: Boolean, ven: Boolean, sab: Boolean, dom: Boolean) {
-        giorniNotifica[1] = lun
-        giorniNotifica[2] = mar
-        giorniNotifica[3] = mer
-        giorniNotifica[4] = gio
-        giorniNotifica[5] = ven
-        giorniNotifica[6] = sab
-        giorniNotifica[7] = dom
+    fun setGiorniNotifica(g: Int) {
+        giorniNotifica[g] = true
     }
 
-    fun getGiorno(g: Int): Boolean {
+    fun getGiorniNotifica(g: Int): Boolean {
        return giorniNotifica[g]
     }
 
     fun notificaCompleta(): Boolean {
-        if (farmacoNotifica.isEmpty())
-            else if (oraNotifica.equals(0))
-                else if (minutoNotifica.equals(0))
-                    else if (giorniNotifica.any { true }.not())
-                        return false
-        return true
+        return when {
+            farmacoNotifica.isEmpty() -> false
+            oraNotifica == 0 -> false
+            minutoNotifica == 0 -> false
+            giorniNotifica.any { true }.not() -> false
+            else -> true
+        }
 
     }
 
