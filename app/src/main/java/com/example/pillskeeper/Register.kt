@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -55,6 +56,7 @@ class Register : AppCompatActivity() {
                                 password1Text.text.clear()
                                 password2Text.text.clear()
                                 Toast.makeText(this@Register,"Registrazione avvenuta con successo!",Toast. LENGTH_SHORT).show()
+                                PreferenceManager.getDefaultSharedPreferences(this@Register).edit().putString("username", username).apply()
                                 var intent: Intent = Intent()
                                 intent.putExtra("usernameResult", username)
                                 setResult(RESULT_OK, intent)

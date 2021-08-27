@@ -22,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId) {
                     R.id.menunav -> null
-                    R.id.emailmenu -> openLoginActivity()
+                    R.id.emailmenu -> openEmailActivity()
                     R.id.menusettings -> openSettingsActivity()
                 }
                 return true
@@ -91,12 +90,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun openLoginActivity() {
-        val intent: Intent = Intent(this, Login::class.java)
-        startActivityForResult(intent, 1)
-    }
-
-
     private fun openSettingsActivity() {
         val intent: Intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
@@ -109,8 +102,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun openPillsActivity() {
         val intent: Intent = Intent(this, PillsActivity::class.java)
-        startActivityForResult(intent, 1)
+        startActivity(intent)
     }
 
+    private fun openEmailActivity() {
+        val intent: Intent = Intent(this, EmailActivity::class.java)
+        startActivity(intent)
+    }
 }
 

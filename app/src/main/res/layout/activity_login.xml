@@ -45,7 +45,7 @@
             android:layout_margin="20dp"
             android:background="@drawable/rounded_corner"
             android:singleLine="true"
-            android:hint="Email"
+            android:hint="Username"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:textColor="#353535"

@@ -3,6 +3,7 @@ package com.example.pillskeeper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -49,6 +50,7 @@ class Login : AppCompatActivity() {
                                     Toast.makeText(this@Login,"La password è errata", Toast.LENGTH_SHORT).show()
                                     passwordText.text.clear()
                                 } else {
+                                    PreferenceManager.getDefaultSharedPreferences(this@Login).edit().putString("username", username).apply()
                                     var intent: Intent = Intent()
                                     intent.putExtra("usernameResult", username)
                                     setResult(RESULT_OK, intent)
