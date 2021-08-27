@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/farmacoText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:hint="Nome del farmaco"
+        android:textSize="20sp">
+
+    </EditText>
+
+    <Space
+        android:layout_width="7dp"
+        android:layout_height="20dp">
+
+    </Space>
+
+    <ImageButton
+        android:id="@+id/photoButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="115dp"
+        android:src="@drawable/ic_baseline_add_a_photo">
+
+    </ImageButton>
+
+    <Space
+        android:layout_width="7dp"
+        android:layout_height="20dp">
+
+    </Space>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/aggFarmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Aggiungi farmaco"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_add_inv">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+</LinearLayout>

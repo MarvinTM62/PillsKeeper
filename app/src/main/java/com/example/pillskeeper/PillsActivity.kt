@@ -1,6 +1,7 @@
 package com.example.pillskeeper
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -12,10 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import android.widget.ImageView
-import android.widget.Toast
+import android.view.Window
+import android.view.WindowManager
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -32,6 +35,8 @@ class PillsActivity : AppCompatActivity() {
     lateinit var myRef: DatabaseReference
     lateinit var imageViewTest: ImageView
     lateinit var storageReference: StorageReference
+     lateinit var photoButton: ImageButton
+    //lateinit var listViewInv : ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,38 +44,57 @@ class PillsActivity : AppCompatActivity() {
 
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         myRef = database.getReference("user")
-        imageViewTest = findViewById(R.id.imageviewtest)
+        //imageViewTest = findViewById(R.id.imageviewtest)
 
-
+        var listViewInv : ListView = findViewById(R.id.listInv)
         var floatingButton: FloatingActionButton = findViewById(R.id.fab)
         floatingButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
+                var dialog: Dialog = Dialog(this@PillsActivity)
+                dialog.setContentView(R.layout.iteminv)
 
-                if(ContextCompat.checkSelfPermission(this@PillsActivity,
-                        Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this@PillsActivity,
-                        Array(100) {
-                        Manifest.permission.CAMERA
-                    }, 100)
+                photoButton = dialog.findViewById<ImageButton>(R.id.photoButton)
+                photoButton.setOnClickListener(object : View.OnClickListener{
+                    override fun onClick(p0: View?) {
+                        if(ContextCompat.checkSelfPermission(this@PillsActivity,
+                                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(this@PillsActivity,
+                                Array(100) {
+                                    Manifest.permission.CAMERA
+                                }, 100)
+                        }
+                        var intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(intent, 100)
+                    }
+                })
+
+                /*var farmname : EditText = findViewById(R.id.farmacoText)
+                var photobutton : Button = findViewById(R.id.aggFoto)
+                var savebutton : EditText = findViewById(R.id.aggFarmButton)*/
+                dialog.show()
+                val window: Window? = dialog.getWindow()
+                if (window != null) {
+                    window.setLayout(1000, 1000)
                 }
-                var intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, 100)
+
+
+
+
             }
         })
 
-        var auth: FirebaseAuth = FirebaseAuth.getInstance()
+
+
+        /*var auth: FirebaseAuth = FirebaseAuth.getInstance()
         storageReference = FirebaseStorage.getInstance().getReference("User/"+ auth.currentUser?.uid)
         val ONE_MEGABYTE: Long = 1024 * 1024
-        var saas = storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            println("ok")
-        }.addOnFailureListener {
-            println("non va bene")
-            // Handle any errors
-        }
-
-        var byte = saas.result
-        var bitmap : Bitmap = BitmapFactory.decodeByteArray(saas.result, 0, byte?.size!!)
-        imageViewTest.setImageBitmap(bitmap)
+        storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(object :
+            OnSuccessListener<ByteArray> {
+            override fun onSuccess(bytearray: ByteArray?) {
+                var bitmap: Bitmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray?.size!!)
+                imageViewTest.setImageBitmap(bitmap)
+            }
+        })*/
 
     }
 
