@@ -48,7 +48,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start|top"
-        android:lines="12" />
+        android:lines="13" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="12dp">
+
+    </Space>
 
     <Button
         android:id="@+id/button_send"
@@ -56,12 +62,14 @@
         android:layout_height="wrap_content"
         android:text="invia" />
 
-    <Space
+    <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="164dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    </Space>
-
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"

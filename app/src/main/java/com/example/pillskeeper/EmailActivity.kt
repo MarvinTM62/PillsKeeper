@@ -3,6 +3,7 @@ package com.example.pillskeeper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent;
+import android.preference.PreferenceManager
 import android.view.MenuItem
 import android.view.View;
 import android.widget.Button;
@@ -36,13 +37,16 @@ class EmailActivity : AppCompatActivity() {
         mEditTextTo = findViewById(R.id.edit_text_to)
         mEditTextSubject = findViewById(R.id.edit_text_subject)!!
         mEditTextMessage = findViewById(R.id.edit_text_message)!!
+        mEditTextTo.setText(PreferenceManager.getDefaultSharedPreferences(this@EmailActivity).getString("emaildoctor", ""))
         mEditTextSubject.setText("Prescrizione nuovi medicinali")
-
+        mEditTextMessage.setText("Buongiorno, avrei bisogno dei seguenti medicinali: " +
+                "\"indicare i medicinali\"" + ".\nGrazie mille, buona giornata.")
 
         val buttonSend = findViewById<Button>(R.id.button_send)
         buttonSend.setOnClickListener {
             sendMail()
         }
+
     }
 
     private fun sendMail() {
