@@ -8,6 +8,42 @@
     android:clickable="true"
     tools:context=".AddReminderActivity">
 
+    <NumberPicker
+        android:id="@+id/oraPicker"
+        android:layout_width="66dp"
+        android:layout_height="153dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottoneCreaNotifica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/giorniButtonsGroup"
+        app:layout_constraintVertical_bias="0.679" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="192dp"
+        android:layout_height="31dp"
+        android:text="Seleziona ora"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/minutiPicker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/giorniButtonsGroup"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <NumberPicker
+        android:id="@+id/minutiPicker"
+        android:layout_width="66dp"
+        android:layout_height="153dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottoneCreaNotifica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/oraPicker"
+        app:layout_constraintTop_toBottomOf="@+id/giorniButtonsGroup"
+        app:layout_constraintVertical_bias="0.679" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="414dp"
@@ -66,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Quantità da assumere"
+        android:hint="Quantità (opzionale)"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,21 +118,20 @@
         android:text="Seleziona giorni"
         android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/materialButtonToggleGroup"
+        app:layout_constraintBottom_toTopOf="@+id/giorniButtonsGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantitaFarmacoText"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.972" />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/materialButtonToggleGroup"
-        android:layout_width="343dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="408dp"
+        android:id="@+id/giorniButtonsGroup"
+        android:layout_width="333dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="380dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
@@ -104,6 +139,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="L"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -115,6 +151,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="M"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -126,6 +163,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="M"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -137,6 +175,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="G"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -148,6 +187,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="V"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -159,6 +199,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="S"
             android:textColor="#03A9F4"
             android:textSize="17sp"
@@ -170,6 +211,7 @@
             style="@style/ReminderButtons"
             android:layout_width="49dp"
             android:layout_height="54dp"
+            android:checkable="true"
             android:text="D"
             android:textColor="#03A9F4"
             android:textSize="17sp"

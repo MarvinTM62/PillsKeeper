@@ -48,15 +48,5 @@ data class Notifica(val farmaco: String){
        return giorniNotifica[g]
     }
 
-    fun notificaCompleta(): Boolean {
-        return when {
-            farmacoNotifica.isEmpty() -> false
-            oraNotifica == 0 -> false
-            minutoNotifica == 0 -> false
-            giorniNotifica.any { true }.not() -> false
-            else -> true
-        }
-
-    }
 
 }
