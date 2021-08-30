@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
@@ -31,9 +32,15 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
+import android.widget.TextView
+
+
+
 
 class PillsActivity : AppCompatActivity() {
 
+    var pillsName : ArrayList<String> = ArrayList()
+    var pillsImage : ArrayList<Bitmap> = ArrayList()
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
     lateinit var storageReference: StorageReference
@@ -43,11 +50,21 @@ class PillsActivity : AppCompatActivity() {
     lateinit var captureImage: Bitmap
     private var username: String = ""
     lateinit var itemFarmaci: List<CardView>
-    //lateinit var listViewInv : ListView
+    lateinit var listViewInv : ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pills2)
+
+        pillsName.add("Moment")
+        pillsName.add("Oki")
+        pillsName.add("asdhjk")
+        pillsName.add("dsadsad")
+        pillsName.add("asdoiu")
+        pillsName.add("asdkjfv")
+        listViewInv = findViewById(R.id.listInv)
+        var adapter : MyAdapter = MyAdapter()
+        listViewInv.adapter = adapter
 
         username = PreferenceManager.getDefaultSharedPreferences(this@PillsActivity).getString("username", "Login non effettuato")!!
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -147,4 +164,32 @@ class PillsActivity : AppCompatActivity() {
 
         }
     }
+
+
+
+    inner class MyAdapter : BaseAdapter() {
+
+        override fun getCount(): Int {
+            return pillsName.size
+        }
+
+        override fun getItem(p0: Int): Any? {
+            return null
+        }
+
+        override fun getItemId(p0: Int): Long {
+            return 0
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            val convertView2 = layoutInflater.inflate(R.layout.itemfarmaci, parent, false)
+            val textView: TextView = convertView2.findViewById(R.id.nomeFarmText)
+            textView.text = pillsName[position]
+            return convertView2
+        }
+
+    }
 }
+
+
+
