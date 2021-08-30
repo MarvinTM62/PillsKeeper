@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardPill"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="10dp"
@@ -20,37 +21,32 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 
-        <!--
-        In the above cardview widget
-        cardelevation property will give elevation to your card view
-        card corner radius will provide radius to your card view
-        card background color will give background color to your card view
-        card max elevation will give the cardview maximum elevation
-        card prevent corner overlap will add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners.
-        card use compact padding will add padding in API v21+ as well to have the same measurements with previous versions.
-        below are the two widgets imageview and text view we are displaying inside our card view.
-        -->
 
         <ImageButton
-            android:id="@+id/img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/deletePill"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_gravity="center|end"
             android:layout_margin="10dp"
-
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_delete_forever"
+            android:background="@color/white"
             android:contentDescription="@string/app_name" />
+
 
         <ImageButton
-            android:id="@+id/img2"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-
-
-            android:contentDescription="@string/app_name" />
+            android:id="@+id/showImage"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center|end"
+            android:layout_margin="65dp"
+            android:contentDescription="@string/app_name"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_imagepill"
+            android:scaleType="fitCenter"/>
 
         <TextView
+            android:id="@+id/nomeFarmText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
@@ -64,4 +60,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</LinearLayout>

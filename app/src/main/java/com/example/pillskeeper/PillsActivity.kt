@@ -1,6 +1,7 @@
 package com.example.pillskeeper
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -11,11 +12,13 @@ import android.media.Image
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.*
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnSuccessListener
@@ -33,25 +36,41 @@ class PillsActivity : AppCompatActivity() {
 
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
-    lateinit var imageViewTest: ImageView
     lateinit var storageReference: StorageReference
-     lateinit var photoButton: ImageButton
+    lateinit var photoButton: ImageButton
+    lateinit var farmName: EditText
+    lateinit var saveButton: Button
+    lateinit var captureImage: Bitmap
+    private var username: String = ""
+    lateinit var itemFarmaci: List<CardView>
     //lateinit var listViewInv : ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pills2)
 
+        username = PreferenceManager.getDefaultSharedPreferences(this@PillsActivity).getString("username", "Login non effettuato")!!
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         myRef = database.getReference("user")
-        //imageViewTest = findViewById(R.id.imageviewtest)
+        storageReference = FirebaseStorage.getInstance().getReference("User/")
+
 
         var listViewInv : ListView = findViewById(R.id.listInv)
         var floatingButton: FloatingActionButton = findViewById(R.id.fab)
         floatingButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
+                if (username == "Login non effettuato"){
+                    val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@PillsActivity)
+                    permissionAllert.setTitle("Login non effettuato!")
+                    permissionAllert.setMessage("Per poter usare questa funzione devi effettuare il login o la registrazione nelle impostazioni")
+                    permissionAllert.setIcon(R.drawable.settings_alert)
+                    permissionAllert.create().show();
+                    return
+                }
                 var dialog: Dialog = Dialog(this@PillsActivity)
                 dialog.setContentView(R.layout.iteminv)
+
+                farmName = dialog.findViewById<EditText>(R.id.farmacoText)
 
                 photoButton = dialog.findViewById<ImageButton>(R.id.photoButton)
                 photoButton.setOnClickListener(object : View.OnClickListener{
@@ -68,18 +87,33 @@ class PillsActivity : AppCompatActivity() {
                     }
                 })
 
-                /*var farmname : EditText = findViewById(R.id.farmacoText)
-                var photobutton : Button = findViewById(R.id.aggFoto)
-                var savebutton : EditText = findViewById(R.id.aggFarmButton)*/
+                saveButton = dialog.findViewById<Button>(R.id.aggFarmButton)
+                saveButton.setOnClickListener(object: View.OnClickListener{
+                    override fun onClick(p0: View?) {
+                        if(farmName.text.toString() == "" ) {
+                            Toast.makeText(this@PillsActivity, "Inserire nome farmaco", Toast.LENGTH_SHORT ).show()
+
+                        }
+
+                        else if (captureImage == null){
+                            Toast.makeText(this@PillsActivity, "Foto farmaco mancante", Toast.LENGTH_SHORT ).show()
+                        }
+                        else {
+                            val baos = ByteArrayOutputStream()
+                            captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                            val dataByte = baos.toByteArray()
+                            storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte).addOnSuccessListener { Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show() }
+                                .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}
+                            dialog.dismiss()
+                        }
+                    }
+                })
+
                 dialog.show()
                 val window: Window? = dialog.getWindow()
                 if (window != null) {
                     window.setLayout(1000, 1000)
                 }
-
-
-
-
             }
         })
 
@@ -96,20 +130,20 @@ class PillsActivity : AppCompatActivity() {
             }
         })*/
 
+
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 100) {
-            var captureImage: Bitmap = data?.extras?.get("data") as Bitmap
-            imageViewTest.setImageBitmap(captureImage)
-            val baos = ByteArrayOutputStream()
+            captureImage = data?.extras?.get("data") as Bitmap
+            /*val baos = ByteArrayOutputStream()
             captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
             val dataByte = baos.toByteArray()
-            myRef.child("gabri").child("pills").setValue(Pill("greve", dataByte))
             storageReference.putBytes(dataByte).addOnSuccessListener { Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show() }
-                .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}
+                .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}*/
 
         }
     }

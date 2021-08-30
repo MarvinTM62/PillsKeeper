@@ -10,9 +10,8 @@
     <ListView
         android:id="@+id/listInv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
+        android:layout_height="wrap_content"
+        android:divider="@color/black"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,8 +25,6 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="25dp"
         app:backgroundTint="#CC3C6A"
-
-        android:src="@drawable/ic_baseline_add"
-        />
+        android:src="@drawable/ic_baseline_add" />
 
 </RelativeLayout>
