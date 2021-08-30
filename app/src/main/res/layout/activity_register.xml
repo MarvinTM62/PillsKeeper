@@ -47,6 +47,7 @@
             android:singleLine="true"
             android:background="@drawable/rounded_corner"
             android:hint="Username"
+            android:maxLength="20"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:textColor="#353535"
