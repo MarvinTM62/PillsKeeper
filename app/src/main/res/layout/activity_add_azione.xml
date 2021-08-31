@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddAzioneActivity">
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/giorniButtonsGroup2"
+        android:layout_width="333dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="380dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/buttonLun2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="L"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonMar2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="M"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonMer2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="M"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonGio2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="G"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonVen2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="V"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonSab2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="S"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+
+        <Button
+            android:id="@+id/buttonDom2"
+            style="@style/ReminderButtons"
+            android:layout_width="49dp"
+            android:layout_height="54dp"
+            android:checkable="true"
+            android:text="D"
+            android:textColor="#03A9F4"
+            android:textSize="17sp"
+            app:strokeColor="#03A9F4"
+            app:strokeWidth="2dp" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <EditText
+        android:id="@+id/nomeAzioneNotificaText"
+        android:layout_width="326dp"
+        android:layout_height="43dp"
+        android:layout_marginBottom="552dp"
+        android:ems="10"
+        android:hint="Prendi pressione, battito cardiaco, etc."
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <NumberPicker
+        android:id="@+id/oraPicker2"
+        android:layout_width="66dp"
+        android:layout_height="153dp"
+        android:layout_marginBottom="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/minutiPicker2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="192dp"
+        android:layout_height="31dp"
+        android:text="Seleziona ora"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/minutiPicker2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <NumberPicker
+        android:id="@+id/minutiPicker2"
+        android:layout_width="66dp"
+        android:layout_height="153dp"
+        android:layout_marginBottom="152dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.594"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="192dp"
+        android:layout_height="31dp"
+        android:text="Seleziona giorni"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/giorniButtonsGroup2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar4"
+        android:layout_width="414dp"
+        android:layout_height="57dp"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="#03A9F4"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aggiungi Notifica"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar4"
+        app:layout_constraintStart_toStartOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/bottoneCreaNotifica2"
+        android:layout_width="321dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="#03A9F4"
+        android:text="Crea Notifica"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

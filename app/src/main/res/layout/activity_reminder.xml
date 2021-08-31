@@ -10,19 +10,19 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addReminderButton"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="#03A9F4"
-        app:fabCustomSize="75dp"
+        app:fabCustomSize="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="35dp"
+        app:maxImageSize="45dp"
         app:srcCompat="@drawable/aggiungi_farmaco"
         app:tint="#EEE"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />

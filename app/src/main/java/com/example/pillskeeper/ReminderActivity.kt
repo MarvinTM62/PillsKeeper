@@ -17,7 +17,7 @@ class ReminderActivity : AppCompatActivity() {
         val backArrowReminder: View = findViewById(R.id.backArrowReminder)
 
         addReminderButton.setOnClickListener{
-            startActivity(Intent(this, AddReminderActivity::class.java))
+            startActivity(Intent(this, ChooseReminderActivity::class.java))
         }
 
         backArrowReminder.setOnClickListener{

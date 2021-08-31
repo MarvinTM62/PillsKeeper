@@ -6,13 +6,9 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.view.View
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.button.MaterialButtonToggleGroup
-import org.w3c.dom.Text
 import java.util.*
 
 class AddReminderActivity : AppCompatActivity() {
