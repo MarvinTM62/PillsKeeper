@@ -33,8 +33,10 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.ByteArrayOutputStream
 import android.widget.TextView
+import android.widget.Toast
 
-
+import android.content.DialogInterface
+import com.google.firebase.storage.UploadTask
 
 
 class PillsActivity : AppCompatActivity() {
@@ -51,6 +53,7 @@ class PillsActivity : AppCompatActivity() {
     private var username: String = ""
     lateinit var itemFarmaci: List<CardView>
     lateinit var listViewInv : ListView
+    var numero: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,13 +66,14 @@ class PillsActivity : AppCompatActivity() {
         pillsName.add("asdoiu")
         pillsName.add("asdkjfv")
         listViewInv = findViewById(R.id.listInv)
-        var adapter : MyAdapter = MyAdapter()
+        var adapter = MyAdapter()
         listViewInv.adapter = adapter
 
         username = PreferenceManager.getDefaultSharedPreferences(this@PillsActivity).getString("username", "Login non effettuato")!!
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         myRef = database.getReference("user")
         storageReference = FirebaseStorage.getInstance().getReference("User/")
+
 
 
         var listViewInv : ListView = findViewById(R.id.listInv)
@@ -119,7 +123,17 @@ class PillsActivity : AppCompatActivity() {
                             val baos = ByteArrayOutputStream()
                             captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                             val dataByte = baos.toByteArray()
-                            storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte).addOnSuccessListener { Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show() }
+                            storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte).
+                            addOnSuccessListener(object: OnSuccessListener<UploadTask.TaskSnapshot> {
+                                override fun onSuccess(taskSnapshot: UploadTask.TaskSnapshot?) {
+                                    if (taskSnapshot != null) {
+                                        var downloadUri = taskSnapshot.storage.downloadUrl
+                                        if(downloadUri.isSuccessful){
+                                            Toast.makeText(this@PillsActivity, downloadUri.result.toString(), Toast.LENGTH_SHORT ).show()
+                                        }
+                                    }
+                                }
+                            })
                                 .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}
                             dialog.dismiss()
                         }
@@ -185,6 +199,29 @@ class PillsActivity : AppCompatActivity() {
             val convertView2 = layoutInflater.inflate(R.layout.itemfarmaci, parent, false)
             val textView: TextView = convertView2.findViewById(R.id.nomeFarmText)
             textView.text = pillsName[position]
+            val showimage = convertView2.findViewById<ImageButton>(R.id.showImage)
+            val deletepill = convertView2.findViewById<ImageButton>(R.id.deletePill)
+            showimage.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    println("Numero: " + numero)
+                    numero++
+                }
+            })
+            deletepill.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(p0: View?) {
+                    AlertDialog.Builder(this@PillsActivity)
+                        .setTitle("Elimina farmaco")
+                        .setMessage("Vuoi eliminare il farmaco definitivamente?")
+                        .setIcon(R.drawable.ic_baseline_warning)
+                        .setPositiveButton("Sì") {
+                                dialog, whichButton ->
+                                pillsName.remove(pillsName[position])
+                                listViewInv.adapter = MyAdapter()
+                                Toast.makeText(this@PillsActivity, "Eliminazione avvenuta con successo", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton("Annulla", null).show()
+                }
+            })
             return convertView2
         }
 
