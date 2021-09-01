@@ -68,6 +68,7 @@
         android:paddingLeft="80dp"
         android:paddingRight="80dp"
         android:text="invia"
+        android:textColor="@color/white"
         android:textSize="16dp"/>
 
     <LinearLayout

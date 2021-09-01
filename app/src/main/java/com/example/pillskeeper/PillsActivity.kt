@@ -57,6 +57,7 @@ class PillsActivity : AppCompatActivity() {
     private var username: String = ""
     lateinit var itemFarmaci: List<CardView>
     lateinit var listViewInv : ListView
+    lateinit var checkView: ImageView
     var numero: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,7 +114,7 @@ class PillsActivity : AppCompatActivity() {
                 dialog.setContentView(R.layout.iteminv)
 
                 farmName = dialog.findViewById<EditText>(R.id.farmacoText)
-
+                checkView = dialog.findViewById<ImageView>(R.id.checkPhoto)
                 photoButton = dialog.findViewById<ImageButton>(R.id.photoButton)
                 photoButton.setOnClickListener(object : View.OnClickListener{
                     override fun onClick(p0: View?) {
@@ -164,16 +165,6 @@ class PillsActivity : AppCompatActivity() {
             }
         })
 
-        /*var auth: FirebaseAuth = FirebaseAuth.getInstance()
-        storageReference = FirebaseStorage.getInstance().getReference("User/"+ auth.currentUser?.uid)
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        storageReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(object :
-            OnSuccessListener<ByteArray> {
-            override fun onSuccess(bytearray: ByteArray?) {
-                var bitmap: Bitmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray?.size!!)
-                imageViewTest.setImageBitmap(bitmap)
-            }
-        })*/
     }
 
 
@@ -182,12 +173,7 @@ class PillsActivity : AppCompatActivity() {
 
         if(requestCode == 100) {
             captureImage = data?.extras?.get("data") as Bitmap
-            /*val baos = ByteArrayOutputStream()
-            captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val dataByte = baos.toByteArray()
-            storageReference.putBytes(dataByte).addOnSuccessListener { Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show() }
-                .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}*/
-
+            checkView.visibility = View.VISIBLE
         }
     }
 

@@ -5,13 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".PillsActivity">
+    tools:context=".PillsActivity"
+    android:background="@drawable/invbackground">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="414dp"
+        android:layout_height="57dp"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="#0B5D9C"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Gestione inventario pillole"
+            android:paddingRight="30dp"
+            android:textSize="21dp"
+            android:textColor="@color/white"
+            android:gravity = "center"
+            android:id="@+id/toolbarPills_title" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
 
     <ListView
         android:id="@+id/listInv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/black"/>
+        android:layout_marginTop="58dp"
+        android:divider="@color/black" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

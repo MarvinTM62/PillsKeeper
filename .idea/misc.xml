@@ -6,38 +6,35 @@
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_add_inv.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_photo.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_reg.xml" value="0.3828125" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_send.xml" value="0.3828125" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_settings.xml" value="0.3828125" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/invbackground.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_add_reminder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_email.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_google_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_main.xml" value="0.24909420289855072" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.25181159420289856" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.33" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_reminder.xml" value="0.24139492753623187" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/itemfarmaci.xml" value="0.33" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/iteminv.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_add_azione.xml" value="0.3328804347826087" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/iteminv.xml" value="0.33" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_add_reminder.xml" value="0.33" />
-        <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_choose_reminder.xml" value="0.3328804347826087" />
-        <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_choose_reminder_type.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_google_maps.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_maps.xml" value="0.16590678824721378" />
-        <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.33" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_reminder.xml" value="0.33" />
         <entry key="..\:/Users/bluxe/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.16590678824721378" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/ic_baseline_warning.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/ic_login.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/round_corner_doctor.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/rounded_corner.xml" value="0.15462962962962962" />
-        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_email.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_login.xml" value="0.13179347826086957" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_main.xml" value="0.12666666666666668" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_register.xml" value="0.13677536231884058" />
-        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/fragment_blank.xml" value="0.1213768115942029" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/fragment_settings.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/imagepopup.xml" value="0.1526268115942029" />
-        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/itemfarmaci.xml" value="0.22" />
-        <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/iteminv.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/laura/AndroidStudioProjects/PillsKeeper/app/src/main/res/menu/navigation.xml" value="0.1796875" />
         <entry key="..\:/Users/laura/StudioProjects/PillsKeeper/app/src/main/res/layout/activity_google_maps.xml" value="0.1743659420289855" />
         <entry key="..\:/Users/laura/StudioProjects/PillsKeeper/app/src/main/res/layout/activity_main.xml" value="0.14666666666666667" />
