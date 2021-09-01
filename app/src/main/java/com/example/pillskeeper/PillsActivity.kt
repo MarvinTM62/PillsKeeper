@@ -25,8 +25,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -36,7 +34,13 @@ import android.widget.TextView
 import android.widget.Toast
 
 import android.content.DialogInterface
+import android.util.Log
+import com.google.firebase.database.*
 import com.google.firebase.storage.UploadTask
+import com.google.firebase.database.DataSnapshot
+
+
+
 
 
 class PillsActivity : AppCompatActivity() {
@@ -59,24 +63,41 @@ class PillsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pills2)
 
-        pillsName.add("Moment")
-        pillsName.add("Oki")
-        pillsName.add("asdhjk")
-        pillsName.add("dsadsad")
-        pillsName.add("asdoiu")
-        pillsName.add("asdkjfv")
-        listViewInv = findViewById(R.id.listInv)
-        var adapter = MyAdapter()
-        listViewInv.adapter = adapter
-
         username = PreferenceManager.getDefaultSharedPreferences(this@PillsActivity).getString("username", "Login non effettuato")!!
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         myRef = database.getReference("user")
         storageReference = FirebaseStorage.getInstance().getReference("User/")
 
+        val eventListener: ValueEventListener = object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    ds.key?.let { pillsName.add(it) }
+                    ds.key?.let {
+                        storageReference.child(username).child(it).getBytes(1024 * 1024).addOnSuccessListener(object:OnSuccessListener<ByteArray> {
+                            override fun onSuccess(bytearray: ByteArray?) {
+                                var bitmap = BitmapFactory.decodeByteArray(bytearray, 0, bytearray?.size!!)
+                                pillsImage.add(bitmap)
+                            }
+                        })
+                    }
+                }
+                var adapter = MyAdapter()
+                listViewInv = findViewById(R.id.listInv)
+                listViewInv.adapter = adapter
+                tuttoIlProgramma()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.message)
+            }
+        }
+        myRef.child(username).child("pills").addListenerForSingleValueEvent(eventListener)
 
 
-        var listViewInv : ListView = findViewById(R.id.listInv)
+
+    }
+
+    fun tuttoIlProgramma() {
         var floatingButton: FloatingActionButton = findViewById(R.id.fab)
         floatingButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
@@ -123,19 +144,14 @@ class PillsActivity : AppCompatActivity() {
                             val baos = ByteArrayOutputStream()
                             captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                             val dataByte = baos.toByteArray()
-                            storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte).
-                            addOnSuccessListener(object: OnSuccessListener<UploadTask.TaskSnapshot> {
-                                override fun onSuccess(taskSnapshot: UploadTask.TaskSnapshot?) {
-                                    if (taskSnapshot != null) {
-                                        var downloadUri = taskSnapshot.storage.downloadUrl
-                                        if(downloadUri.isSuccessful){
-                                            Toast.makeText(this@PillsActivity, downloadUri.result.toString(), Toast.LENGTH_SHORT ).show()
-                                        }
-                                    }
-                                }
-                            })
-                                .addOnFailureListener{Toast.makeText(this@PillsActivity, "Errore", Toast.LENGTH_SHORT ).show()}
+                            storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte)
+                            myRef.child(username).child("pills").child(farmName.text.toString()).setValue(Pill(farmName.text.toString()))
+                            pillsName.add(farmName.text.toString())
+                            pillsImage.add(captureImage)
+                            listViewInv.adapter = null
+                            listViewInv.adapter = MyAdapter()
                             dialog.dismiss()
+                            Toast.makeText(this@PillsActivity, "Contenuto caricato", Toast.LENGTH_SHORT ).show()
                         }
                     }
                 })
@@ -148,8 +164,6 @@ class PillsActivity : AppCompatActivity() {
             }
         })
 
-
-
         /*var auth: FirebaseAuth = FirebaseAuth.getInstance()
         storageReference = FirebaseStorage.getInstance().getReference("User/"+ auth.currentUser?.uid)
         val ONE_MEGABYTE: Long = 1024 * 1024
@@ -160,8 +174,6 @@ class PillsActivity : AppCompatActivity() {
                 imageViewTest.setImageBitmap(bitmap)
             }
         })*/
-
-
     }
 
 
@@ -203,8 +215,15 @@ class PillsActivity : AppCompatActivity() {
             val deletepill = convertView2.findViewById<ImageButton>(R.id.deletePill)
             showimage.setOnClickListener(object : View.OnClickListener {
                 override fun onClick(p0: View?) {
-                    println("Numero: " + numero)
-                    numero++
+                    var dialog: Dialog = Dialog(this@PillsActivity)
+                    dialog.setContentView(R.layout.imagepopup)
+                    var immagine = dialog.findViewById<ImageView>(R.id.popupforimage)
+                    immagine.setImageBitmap(pillsImage[position])
+                    dialog.show()
+                    val window: Window? = dialog.getWindow()
+                    if (window != null) {
+                        window.setLayout(1000, 1300)
+                    }
                 }
             })
             deletepill.setOnClickListener(object : View.OnClickListener {
@@ -215,7 +234,11 @@ class PillsActivity : AppCompatActivity() {
                         .setIcon(R.drawable.ic_baseline_warning)
                         .setPositiveButton("Sì") {
                                 dialog, whichButton ->
+                                myRef.child(username).child("pills").child(pillsName[position]).removeValue()
+                                storageReference.child(username).child(pillsName[position]).delete()
                                 pillsName.remove(pillsName[position])
+                                pillsImage.remove(pillsImage[position])
+
                                 listViewInv.adapter = MyAdapter()
                                 Toast.makeText(this@PillsActivity, "Eliminazione avvenuta con successo", Toast.LENGTH_SHORT).show()
                         }
