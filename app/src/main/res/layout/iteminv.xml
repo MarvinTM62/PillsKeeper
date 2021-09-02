@@ -46,6 +46,45 @@
 
     </LinearLayout>
 
+    <Space
+        android:layout_width="7dp"
+        android:layout_height="10dp">
+
+    </Space>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:text="Quantità nella confezione: "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_margin="3dp">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/pillsNumber"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_margin="3dp"
+            android:background="@color/browser_actions_bg_grey"
+            android:gravity="center"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="italic"
+            android:maxLength="2">
+
+        </EditText>
+
+
+    </LinearLayout>
 
     <Space
         android:layout_width="7dp"

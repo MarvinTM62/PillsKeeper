@@ -51,6 +51,7 @@ class PillsActivity : AppCompatActivity() {
     lateinit var myRef: DatabaseReference
     lateinit var storageReference: StorageReference
     lateinit var photoButton: ImageButton
+    lateinit var pillsNumber: EditText
     lateinit var farmName: EditText
     lateinit var saveButton: Button
     lateinit var captureImage: Bitmap
@@ -116,6 +117,7 @@ class PillsActivity : AppCompatActivity() {
                 farmName = dialog.findViewById<EditText>(R.id.farmacoText)
                 checkView = dialog.findViewById<ImageView>(R.id.checkPhoto)
                 photoButton = dialog.findViewById<ImageButton>(R.id.photoButton)
+                pillsNumber = dialog.findViewById<EditText>(R.id.pillsNumber)
                 photoButton.setOnClickListener(object : View.OnClickListener{
                     override fun onClick(p0: View?) {
                         if(ContextCompat.checkSelfPermission(this@PillsActivity,
@@ -146,7 +148,7 @@ class PillsActivity : AppCompatActivity() {
                             captureImage.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                             val dataByte = baos.toByteArray()
                             storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte)
-                            myRef.child(username).child("pills").child(farmName.text.toString()).setValue(Pill(farmName.text.toString()))
+                            myRef.child(username).child("pills").child(farmName.text.toString()).setValue(Pill(farmName.text.toString(), (pillsNumber.text.toString()).toInt()))
                             pillsName.add(farmName.text.toString())
                             pillsImage.add(captureImage)
                             listViewInv.adapter = null
@@ -160,7 +162,7 @@ class PillsActivity : AppCompatActivity() {
                 dialog.show()
                 val window: Window? = dialog.getWindow()
                 if (window != null) {
-                    window.setLayout(1000, 1000)
+                    window.setLayout(1000, 1100)
                 }
             }
         })
