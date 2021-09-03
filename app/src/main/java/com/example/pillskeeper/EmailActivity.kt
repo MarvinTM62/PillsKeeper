@@ -65,12 +65,18 @@ class EmailActivity : AppCompatActivity() {
 
     private fun openSettingsActivity() {
         val intent: Intent = Intent(this, SettingsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 
     private fun openMenuActivity() {
         val intent: Intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 
 }

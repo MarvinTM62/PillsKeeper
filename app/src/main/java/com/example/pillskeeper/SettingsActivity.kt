@@ -1,9 +1,12 @@
 package com.example.pillskeeper
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.text.InputType
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -11,6 +14,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView.OnEditorActionListener
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -87,6 +94,7 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
 
+        /*
         doctorText.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(v: View?, hasFocus: Boolean) {
                 if(!hasFocus) {
@@ -94,6 +102,24 @@ class SettingsActivity : AppCompatActivity() {
                     PreferenceManager.getDefaultSharedPreferences(this@SettingsActivity).edit().putString("emaildoctor", emailDoctor).apply()
                 }
 
+            }
+        }) */
+
+        doctorText.setOnEditorActionListener(object: OnEditorActionListener {
+            override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+                var handled = false
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    emailDoctor = doctorText.text.toString()
+                    PreferenceManager.getDefaultSharedPreferences(this@SettingsActivity).edit().putString("emaildoctor", emailDoctor).apply()
+                    val inputManager: InputMethodManager =
+                        this@SettingsActivity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    inputManager.hideSoftInputFromWindow(
+                        currentFocus?.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                    )
+                    handled = true;
+                }
+                return handled
             }
         })
 
@@ -124,7 +150,10 @@ class SettingsActivity : AppCompatActivity() {
     }
     private fun openMenuActivity() {
         val intent: Intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 
     private fun openRegisterActivity() {
@@ -134,6 +163,9 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun openEmailActivity() {
         val intent: Intent = Intent(this, EmailActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 }

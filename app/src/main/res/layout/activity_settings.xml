@@ -151,6 +151,7 @@
             android:singleLine="true"
             android:textColor="#353535"
             android:textColorHint="#C1C1C1"
+            android:imeOptions="actionDone"
             android:textSize="17sp" />
 
     </LinearLayout>
@@ -163,6 +164,6 @@
         app:itemIconSize="30dp"
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/navigation"/>
+        app:menu="@menu/navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

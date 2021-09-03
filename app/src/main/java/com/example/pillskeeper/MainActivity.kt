@@ -92,7 +92,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun openSettingsActivity() {
         val intent: Intent = Intent(this, SettingsActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 
     private fun openReminderActivity() {
@@ -107,7 +110,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun openEmailActivity() {
         val intent: Intent = Intent(this, EmailActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+        finish()
+        overridePendingTransition(0, 0)
     }
 }
 
