@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardNot"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+
+        <ImageButton
+            android:id="@+id/deleteNot"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center|end"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_delete_forever"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+
+        <TextView
+            android:id="@+id/nomeNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="Farmaco/Azione"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/quantitaNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="Dosi"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/counterNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="Rimanenti"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/oraNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="220dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="20dp"
+            android:text="xx : xx"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:id="@+id/lunNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="174dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="L"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/marNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="M"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/merNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="213dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="M"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/gioNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="234dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="G"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/venNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="254dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="V"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/sabNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="274dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="S"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/domNotText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="294dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginBottom="20dp"
+            android:text="D"
+            android:textSize="14sp" />
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

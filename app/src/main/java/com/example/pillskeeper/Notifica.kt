@@ -3,20 +3,24 @@ package com.example.pillskeeper
 import android.text.Editable
 import org.w3c.dom.Text
 
-data class Notifica(val farmaco: String){
-    private val farmacoNotifica = farmaco
+data class Notifica(val nome: String){
+    private val nomeNotifica = nome
     private var counterFarmaco = 0
     private var quantitaFarmaco = 0
     private var oraNotifica = 0
     private var minutoNotifica = 0
     private var giorniNotifica = arrayOf(false, false, false, false, false, false, false)
 
-    fun getNomeFarmacoNotifica(): String {
-        return farmacoNotifica
+    fun getNomeNotifica(): String {
+        return nome
     }
 
     fun setCounterFarmaco(n: Int) {
         counterFarmaco = n
+    }
+
+    fun getCounterFarmaco(): Int {
+        return counterFarmaco
     }
 
     fun setQuantitaFarmaco(n: Int){
@@ -39,8 +43,16 @@ data class Notifica(val farmaco: String){
             counterFarmaco = 0
     }
 
+    fun setOraNotifica(o: Int){
+        oraNotifica = o
+    }
+
     fun getOraNotifica(): Int {
         return oraNotifica
+    }
+
+    fun setMinutoNotifica(m: Int){
+        minutoNotifica = m
     }
 
     fun getMinutoNotifica(): Int {

@@ -3,13 +3,20 @@ package com.example.pillskeeper
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.gson.Gson
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashSet
 
 class AddReminderActivity : AppCompatActivity() {
     private val CHANNEL_ID = "channel_id"
@@ -23,7 +30,7 @@ class AddReminderActivity : AppCompatActivity() {
 
         val calendar: Calendar = Calendar.getInstance()
         val oraLocale = calendar.get(Calendar.HOUR)
-        var oraPicked = 0
+        var oraPicked = oraLocale + 1
         val oraPicker = findViewById<NumberPicker>(R.id.oraPicker)
         if (oraPicker != null) {
             oraPicker.minValue = 0
@@ -34,12 +41,12 @@ class AddReminderActivity : AppCompatActivity() {
         }
 
         val minutoLocale = calendar.get(Calendar.MINUTE)
-        var minutiPicked = 0
+        var minutiPicked = minutoLocale + 1
         val minutiPicker = findViewById<NumberPicker>(R.id.minutiPicker)
         if (minutiPicker != null) {
             minutiPicker.minValue = 0
             minutiPicker.maxValue = 59
-            minutiPicker.value = minutoLocale
+            minutiPicker.value = minutoLocale + 1
             minutiPicker.wrapSelectorWheel = true
             minutiPicker.setOnValueChangedListener { numberPicker, i, i2 -> minutiPicked = i2 }
         }
@@ -49,41 +56,52 @@ class AddReminderActivity : AppCompatActivity() {
         bottoneCreaNotifica.setOnClickListener{
             val nomeFarmacoText = findViewById<TextView>(R.id.nomeFarmacoNotificaText).text
             val nomeFarmacoString = nomeFarmacoText.toString()
-            val quantitaFarmaco = (R.id.quantitaFarmacoText).toInt()
-            var giorniSelezionati = arrayOf(false, false, false, false, false, false, false)
+            val quantitaFarmacoText = findViewById<TextView>(R.id.quantitaFarmacoText).text
+            val quantitaFarmacoInt = quantitaFarmacoText.toString()
+            val giorniList: List<Int>
             val giorniButtonGroup = findViewById<MaterialButtonToggleGroup>(R.id.giorniButtonsGroup)
-            giorniButtonGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
-                if (isChecked) {
-                    if (checkedId == R.id.buttonLun)
-                        giorniSelezionati[0] = true
-                    if (checkedId == R.id.buttonMar)
-                        giorniSelezionati[1] = true
-                    if (checkedId == R.id.buttonMer)
-                        giorniSelezionati[2] = true
-                    if (checkedId == R.id.buttonGio)
-                        giorniSelezionati[3] = true
-                    if (checkedId == R.id.buttonVen)
-                        giorniSelezionati[4] = true
-                    if (checkedId == R.id.buttonSab)
-                        giorniSelezionati[5] = true
-                    if (checkedId == R.id.buttonDom)
-                        giorniSelezionati[6] = true
-                }
-            }
-
             if(nomeFarmacoText.isEmpty())
                 Toast.makeText(this@AddReminderActivity, "Selezionare farmaco", Toast.LENGTH_SHORT).show()
             if(giorniButtonGroup.checkedButtonIds.isEmpty()){
-                Toast.makeText(this@AddReminderActivity, "Selezionare almeno un giorno", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@AddReminderActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
             } else {
                 val newNotifica = Notifica(nomeFarmacoString)
-                newNotifica.setQuantitaFarmaco(quantitaFarmaco)
+                if(quantitaFarmacoInt.isEmpty()){
+                    newNotifica.setQuantitaFarmaco(0)
+                } else {
+                    newNotifica.setQuantitaFarmaco(quantitaFarmacoInt.toInt())
+                }
+                newNotifica.setOraNotifica(oraPicked)
+                newNotifica.setMinutoNotifica(minutiPicked)
+                giorniList = giorniButtonGroup.checkedButtonIds
+                if(giorniList.contains(R.id.buttonLun)){
+                    newNotifica.setGiorniNotifica(0)
+                }
+                if(giorniList.contains(R.id.buttonMar)) {
+                    newNotifica.setGiorniNotifica(1)
+                }
+                if(giorniList.contains(R.id.buttonMer)){
+                    newNotifica.setGiorniNotifica(2)
+                }
+                if(giorniList.contains(R.id.buttonGio)){
+                    newNotifica.setGiorniNotifica(3)
+                }
+                if(giorniList.contains(R.id.buttonVen)){
+                    newNotifica.setGiorniNotifica(4)
+                }
+                if(giorniList.contains(R.id.buttonSab)){
+                    newNotifica.setGiorniNotifica(5)
+                }
+                if(giorniList.contains(R.id.buttonDom)){
+                    newNotifica.setGiorniNotifica(6)
+                }
+                NotificheList.notificheList.add(newNotifica)
+                startActivity(Intent(this, ReminderActivity::class.java))
 //                var builder = NotificationCompat.Builder(this, CHANNEL_ID)
 //                    .setSmallIcon(R.drawable.icona_pills_keeper)
-//                    .setContentTitle("Prendi" + quantitaFarmaco.toString() + nomeFarmacoString)
-//                    .setContentText("Much longer text that cannot fit one line...")
+//                    .setContentTitle("Prendi " + quantitaFarmaco + " " + nomeFarmacoString)
 //                    .setStyle(NotificationCompat.BigTextStyle()
-//                        .bigText("Much longer text that cannot fit one line..."))
+//                        .bigText("Descrizione"))
 //                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 //                with(NotificationManagerCompat.from(this)){
 //                    notify(notificationID, builder.build())
@@ -106,4 +124,15 @@ class AddReminderActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(canale)
         }
     }
+
+//    private fun saveNotifica(notifica: Notifica){
+//        val notificaString = notifica.getNomeFarmacoNotifica()
+//        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
+//        var editor = sharedPreferences.edit()
+//        var hashSet = HashSet<Notifica>()
+//        hashSet.addAll(NotificheList.notificheList)
+//        editor.putStringSet("notifica1", null)
+//        editor.commit()
+//
+//    }
 }

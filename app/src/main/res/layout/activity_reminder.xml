@@ -70,4 +70,13 @@
         app:srcCompat="@drawable/abc_vector_test"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <ListView
+        android:id="@+id/notificheListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
