@@ -8,12 +8,14 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.widget.*
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
@@ -29,12 +31,12 @@ class AddReminderActivity : AppCompatActivity() {
         creaCanaleNotifica()
 
         val calendar: Calendar = Calendar.getInstance()
-        val oraLocale = calendar.get(Calendar.HOUR)
+        val oraLocale = calendar.get(Calendar.HOUR_OF_DAY)
         var oraPicked = oraLocale + 1
         val oraPicker = findViewById<NumberPicker>(R.id.oraPicker)
         if (oraPicker != null) {
             oraPicker.minValue = 0
-            oraPicker.maxValue = 24
+            oraPicker.maxValue = 23
             oraPicker.value = oraLocale + 1
             oraPicker.wrapSelectorWheel = true
             oraPicker.setOnValueChangedListener { numberPicker, i, i2 -> oraPicked = i2 }
@@ -46,7 +48,11 @@ class AddReminderActivity : AppCompatActivity() {
         if (minutiPicker != null) {
             minutiPicker.minValue = 0
             minutiPicker.maxValue = 59
-            minutiPicker.value = minutoLocale + 1
+            if(minutiPicker.value == 59){
+                minutiPicker.value = 0
+            } else {
+                minutiPicker.value = minutoLocale + 1
+            }
             minutiPicker.wrapSelectorWheel = true
             minutiPicker.setOnValueChangedListener { numberPicker, i, i2 -> minutiPicked = i2 }
         }
@@ -56,6 +62,7 @@ class AddReminderActivity : AppCompatActivity() {
         bottoneCreaNotifica.setOnClickListener{
             val nomeFarmacoText = findViewById<TextView>(R.id.nomeFarmacoNotificaText).text
             val nomeFarmacoString = nomeFarmacoText.toString()
+            //get nome from database farmaci
             val quantitaFarmacoText = findViewById<TextView>(R.id.quantitaFarmacoText).text
             val quantitaFarmacoInt = quantitaFarmacoText.toString()
             val giorniList: List<Int>
@@ -64,8 +71,9 @@ class AddReminderActivity : AppCompatActivity() {
                 Toast.makeText(this@AddReminderActivity, "Selezionare farmaco", Toast.LENGTH_SHORT).show()
             if(giorniButtonGroup.checkedButtonIds.isEmpty()){
                 Toast.makeText(this@AddReminderActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
-            } else {
+            } else if (!nomeFarmacoText.isEmpty()){
                 val newNotifica = Notifica(nomeFarmacoString)
+                //set counter farmaci rimanenti da database
                 if(quantitaFarmacoInt.isEmpty()){
                     newNotifica.setQuantitaFarmaco(0)
                 } else {
@@ -96,6 +104,8 @@ class AddReminderActivity : AppCompatActivity() {
                     newNotifica.setGiorniNotifica(6)
                 }
                 NotificheList.notificheList.add(newNotifica)
+                val sharedPrefs = SharedPreferencesNotifiche()
+                sharedPrefs.saveNotifiche(this, NotificheList.notificheList)
                 startActivity(Intent(this, ReminderActivity::class.java))
 //                var builder = NotificationCompat.Builder(this, CHANNEL_ID)
 //                    .setSmallIcon(R.drawable.icona_pills_keeper)
@@ -125,14 +135,4 @@ class AddReminderActivity : AppCompatActivity() {
         }
     }
 
-//    private fun saveNotifica(notifica: Notifica){
-//        val notificaString = notifica.getNomeFarmacoNotifica()
-//        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
-//        var editor = sharedPreferences.edit()
-//        var hashSet = HashSet<Notifica>()
-//        hashSet.addAll(NotificheList.notificheList)
-//        editor.putStringSet("notifica1", null)
-//        editor.commit()
-//
-//    }
 }

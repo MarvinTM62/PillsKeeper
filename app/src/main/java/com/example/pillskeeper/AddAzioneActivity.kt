@@ -16,8 +16,8 @@ import java.util.*
 
 class AddAzioneActivity : AppCompatActivity() {
 
-    private val CHANNEL_ID = "channel_id2"
-    private val notificationID = 102
+    private val CHANNEL_ID = "channel_id"
+    private val notificationID = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +26,12 @@ class AddAzioneActivity : AppCompatActivity() {
         creaCanaleNotifica()
 
         val calendar: Calendar = Calendar.getInstance()
-        val oraLocale = calendar.get(Calendar.HOUR)
+        val oraLocale = calendar.get(Calendar.HOUR_OF_DAY)
         var oraPicked = oraLocale + 1
         val oraPicker2 = findViewById<NumberPicker>(R.id.oraPicker2)
         if (oraPicker2 != null) {
             oraPicker2.minValue = 0
-            oraPicker2.maxValue = 24
+            oraPicker2.maxValue = 23
             oraPicker2.value = oraLocale + 1
             oraPicker2.wrapSelectorWheel = true
             oraPicker2.setOnValueChangedListener { numberPicker, i, i2 -> oraPicked = i2 }
@@ -43,7 +43,11 @@ class AddAzioneActivity : AppCompatActivity() {
         if (minutiPicker2 != null) {
             minutiPicker2.minValue = 0
             minutiPicker2.maxValue = 59
-            minutiPicker2.value = minutoLocale + 1
+            if(minutiPicker2.value == 59){
+                minutiPicker2.value = 0
+            } else {
+                minutiPicker2.value = minutoLocale + 1
+            }
             minutiPicker2.wrapSelectorWheel = true
             minutiPicker2.setOnValueChangedListener { numberPicker, i, i2 -> minutiPicked = i2 }
         }
@@ -54,10 +58,10 @@ class AddAzioneActivity : AppCompatActivity() {
             val giorniList: List<Int>
             val giorniButtonGroup2 = findViewById<MaterialButtonToggleGroup>(R.id.giorniButtonsGroup2)
             if (nomeAzioneText.isEmpty())
-                Toast.makeText(this@AddAzioneActivity, "Selezionare farmaco", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AddAzioneActivity, "Selezionare azione", Toast.LENGTH_SHORT).show()
             if (giorniButtonGroup2.checkedButtonIds.isEmpty()) {
                 Toast.makeText(this@AddAzioneActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
-            } else {
+            } else if (!nomeAzioneText.isEmpty()){
                 val newNotifica = Notifica(nomeAzioneString)
                 newNotifica.setOraNotifica(oraPicked)
                 newNotifica.setMinutoNotifica(minutiPicked)
@@ -84,6 +88,8 @@ class AddAzioneActivity : AppCompatActivity() {
                     newNotifica.setGiorniNotifica(6)
                 }
                 NotificheList.notificheList.add(newNotifica)
+                val sharedPrefs = SharedPreferencesNotifiche()
+                sharedPrefs.saveNotifiche(this, NotificheList.notificheList)
                 startActivity(Intent(this, ReminderActivity::class.java))
             }
         }

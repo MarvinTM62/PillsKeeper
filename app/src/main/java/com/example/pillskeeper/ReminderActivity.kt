@@ -1,64 +1,19 @@
 package com.example.pillskeeper
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class ReminderActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reminder)
-
-        val addReminderButton: View = findViewById(R.id.addReminderButton)
-        val backArrowReminder: View = findViewById(R.id.backArrowReminder)
-        var arrayList: ArrayList<Notifica> = NotificheList.notificheList
-        var listView: ListView = findViewById(R.id.notificheListView)
-
-        addReminderButton.setOnClickListener{
-            startActivity(Intent(this, ChooseReminderActivity::class.java))
-        }
-
-        backArrowReminder.setOnClickListener{
-            startActivity(Intent(this, MainActivity::class.java))
-        }
-
-        var adapter = NotificaAdapter(this, arrayList)
-        listView.adapter = adapter
-
-//        loadNotifica()
-
-
-
-//        var notificheListString: ArrayList<String> = ArrayList()
-//        var notificheListView: ListView = findViewById(R.id.notificheListView)
-//        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(this, android.R.layout.simple_list_item_1, notificheListString)
-//        notificheListString.add("test")
-//        notificheListString.add("test2")
-//        notificheListView.adapter = arrayAdapter
-
-
-    }
-
-//    private fun loadNotifica() {
-//        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
-//        val hashSet = sharedPreferences.getStringSet("notifica1", null)
-//        var notificheListView: ListView = findViewById(R.id.notificheListView)
-//        val arrayAdapter: ArrayAdapter<Notifica> = ArrayAdapter(this, android.R.layout.simple_list_item_1, NotificheList.notificheList)
-//        notificheListView.adapter = arrayAdapter
-//
-//    }
-
-}
-
-class NotificaAdapter(private val context: Context, private val arrayList: ArrayList<Notifica>): BaseAdapter() {
     private lateinit var nomeNotifica: TextView
     private lateinit var quantitaFarmaco: TextView
     private lateinit var counterFarmaco: TextView
@@ -71,70 +26,123 @@ class NotificaAdapter(private val context: Context, private val arrayList: Array
     private lateinit var ven: TextView
     private lateinit var sab: TextView
     private lateinit var dom: TextView
+    private lateinit var deleteNot: ImageButton
+    val sharedPrefs = SharedPreferencesNotifiche()
 
-    override fun getCount(): Int {
-        return arrayList.size
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_reminder)
+
+        NotificheList.notificheList = sharedPrefs.loadNotifiche(this)
+        if(NotificheList.notificheList == null)
+            NotificheList.notificheList = ArrayList()
+
+        val addReminderButton: View = findViewById(R.id.addReminderButton)
+        val backArrowReminder: View = findViewById(R.id.backArrowReminder)
+        var listView: ListView = findViewById(R.id.notificheListView)
+
+        addReminderButton.setOnClickListener {
+            startActivity(Intent(this, ChooseReminderActivity::class.java))
+        }
+
+        backArrowReminder.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        var adapter = NotificaAdapter(this, NotificheList.notificheList)
+        listView.adapter = adapter
+
     }
+    inner class NotificaAdapter(private val context: Context, private val arrayList: ArrayList<Notifica>): BaseAdapter() {
 
-    override fun getItem(position: Int): Any {
-        return position
+        override fun getCount(): Int {
+            return NotificheList.notificheList.size
+        }
+
+        override fun getItem(position: Int): Any {
+            return position
+        }
+
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
+            val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            var convertView = inflater.inflate(R.layout.itemnotifica, parent, false)
+            nomeNotifica = convertView.findViewById(R.id.nomeNotText)
+            quantitaFarmaco = convertView.findViewById(R.id.quantitaNotText)
+            counterFarmaco = convertView.findViewById(R.id.counterNotText)
+            oraNotifica = convertView.findViewById(R.id.oraNotText)
+            lun = convertView.findViewById(R.id.lunNotText)
+            mar = convertView.findViewById(R.id.marNotText)
+            mer = convertView.findViewById(R.id.merNotText)
+            gio = convertView.findViewById(R.id.gioNotText)
+            ven = convertView.findViewById(R.id.venNotText)
+            sab = convertView.findViewById(R.id.sabNotText)
+            dom = convertView.findViewById(R.id.domNotText)
+            nomeNotifica.text = NotificheList.notificheList[position].getNomeNotifica()
+            if(NotificheList.notificheList[position].getQuantitaFarmaco() == 0) {
+                quantitaFarmaco.text = " "
+                counterFarmaco.text = " "
+            } else {
+                quantitaFarmaco.text = "Dosi: " + NotificheList.notificheList[position].getQuantitaFarmaco()
+                counterFarmaco.text = "Rimanenti: " + NotificheList.notificheList[position].getCounterFarmaco().toString()
+            }
+            if(NotificheList.notificheList[position].getCounterFarmaco() == 0) {
+                counterFarmaco.text = " "
+            }
+            if(NotificheList.notificheList[position].getMinutoNotifica() <= 9) {
+                oraNotifica.text = NotificheList.notificheList[position].getOraNotifica().toString() + " : 0" + NotificheList.notificheList[position].getMinutoNotifica().toString()
+            } else {
+                oraNotifica.text = NotificheList.notificheList[position].getOraNotifica().toString() + " : " + NotificheList.notificheList[position].getMinutoNotifica().toString()
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(0)) {
+                lun.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(1)) {
+                mar.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(2)) {
+                mer.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(3)) {
+                gio.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(4)) {
+                ven.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(5)) {
+                sab.text = " "
+            }
+            if(!NotificheList.notificheList[position].getGiorniNotifica(6)) {
+                dom.text = " "
+            }
+            deleteNot = convertView.findViewById(R.id.deleteNot)
+            deleteNot.setOnClickListener {
+                AlertDialog.Builder(this@ReminderActivity)
+                    .setTitle("Elimina notifica")
+                    .setMessage("Vuoi eliminare la notifica definitivamente?")
+                    .setIcon(R.drawable.ic_baseline_warning)
+                    .setPositiveButton("Sì") { dialog, whichButton ->
+                        NotificheList.notificheList.remove(NotificheList.notificheList[position])
+                        sharedPrefs.saveNotifiche(this@ReminderActivity, NotificheList.notificheList)
+                        var adapter = NotificaAdapter(this@ReminderActivity, NotificheList.notificheList)
+                        var listView: ListView = findViewById(R.id.notificheListView)
+                        adapter.notifyDataSetChanged()
+                        listView.invalidateViews()
+                        Toast.makeText(this@ReminderActivity, "Eliminazione avvenuta con successo", Toast.LENGTH_SHORT).show()
+                    }
+                    .setNegativeButton("Annulla", null).show()
+            }
+
+            return convertView
+        }
+
+
     }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {
-        val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var convertView = inflater.inflate(R.layout.itemnotifica, parent, false)
-        nomeNotifica = convertView.findViewById(R.id.nomeNotText)
-        quantitaFarmaco = convertView.findViewById(R.id.quantitaNotText)
-        counterFarmaco = convertView.findViewById(R.id.counterNotText)
-        oraNotifica = convertView.findViewById(R.id.oraNotText)
-        lun = convertView.findViewById(R.id.lunNotText)
-        mar = convertView.findViewById(R.id.marNotText)
-        mer = convertView.findViewById(R.id.merNotText)
-        gio = convertView.findViewById(R.id.gioNotText)
-        ven = convertView.findViewById(R.id.venNotText)
-        sab = convertView.findViewById(R.id.sabNotText)
-        dom = convertView.findViewById(R.id.domNotText)
-        nomeNotifica.text = arrayList[position].getNomeNotifica()
-        if(arrayList[position].getQuantitaFarmaco() == 0) {
-            quantitaFarmaco.text = " "
-            counterFarmaco.text = " "
-        } else {
-            quantitaFarmaco.text = "Dosi: " + arrayList[position].getQuantitaFarmaco()
-            counterFarmaco.text = "Rimanenti: " + arrayList[position].getCounterFarmaco().toString()
-        }
-        if(arrayList[position].getCounterFarmaco() == 0) {
-            counterFarmaco.text = " "
-        }
-        oraNotifica.text = arrayList[position].getOraNotifica().toString() + " : " + arrayList[position].getMinutoNotifica().toString()
-        if(!arrayList[position].getGiorniNotifica(0)) {
-            lun.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(1)) {
-            mar.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(2)) {
-            mer.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(3)) {
-            gio.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(4)) {
-            ven.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(5)) {
-            sab.text = " "
-        }
-        if(!arrayList[position].getGiorniNotifica(6)) {
-            dom.text = " "
-        }
-        return convertView
-    }
-
-
 
 
 }
+
+
