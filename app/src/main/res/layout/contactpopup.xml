@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nomeContattoPop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Nome"
+        android:singleLine="true"
+        android:text="4"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="0dp">
+
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/cognomeContattoPop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Cognome"
+        android:text="4"
+        android:singleLine="true"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/cellularePop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Numero di cellulare"
+        android:inputType="number"
+        android:text="4"
+        android:maxLength="10"
+        android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/emailContattoPop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:text="4"
+        android:layout_marginTop="10dp"
+        android:singleLine="true"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="129dp" />
+
+</LinearLayout>

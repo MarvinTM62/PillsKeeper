@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PillsKeeper">
         <activity
+            android:name=".ContactActivity"
+            android:exported="true" />
+        <activity
             android:name=".AddAzioneActivity"
             android:exported="true" />
         <activity

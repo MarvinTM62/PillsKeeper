@@ -140,8 +140,11 @@ class PillsActivity : AppCompatActivity() {
 
                         }
 
-                        else if (captureImage == null){
+                        else if (checkView.visibility != View.VISIBLE){
                             Toast.makeText(this@PillsActivity, "Foto farmaco mancante", Toast.LENGTH_SHORT ).show()
+                        }
+                        else if (pillsNumber.text.toString() == ""){
+                            Toast.makeText(this@PillsActivity, "Inserire quantità", Toast.LENGTH_SHORT ).show()
                         }
                         else {
                             val baos = ByteArrayOutputStream()
@@ -162,7 +165,7 @@ class PillsActivity : AppCompatActivity() {
                 dialog.show()
                 val window: Window? = dialog.getWindow()
                 if (window != null) {
-                    window.setLayout(1000, 1100)
+                    window.setLayout(1000, 1200)
                 }
             }
         })

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                     permissionAllert3.setIcon(R.drawable.contatti_farmaco)
                     permissionAllert3.create().show();
                 } else */
-                println("Bottone 3")
+                openContactActivity()
             }
         })
         buttonLayoutMap.setOnClickListener(object : View.OnClickListener {
@@ -105,6 +105,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun openPillsActivity() {
         val intent: Intent = Intent(this, PillsActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun openContactActivity(){
+        val intent: Intent = Intent(this, ContactActivity::class.java)
         startActivity(intent)
     }
 

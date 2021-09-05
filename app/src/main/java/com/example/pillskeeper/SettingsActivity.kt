@@ -27,7 +27,6 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var usernameView : TextView
     lateinit var buttonRegister: Button
     lateinit var buttonLogin: Button
-    lateinit var buttonAccedi: Button
     lateinit var doctorText: EditText
     val REGISTER_ACTIVITY_REQUEST_CODE = 1
     val LOGIN_ACTIVITY_REQUEST_CODE = 2
@@ -54,7 +53,6 @@ class SettingsActivity : AppCompatActivity() {
         usernameView = findViewById(R.id.usernameTextView)
         buttonRegister = findViewById(R.id.registratiButtonSettings)
         buttonLogin = findViewById(R.id.loginButtonSettings)
-        buttonAccedi = findViewById(R.id.accediEmailSettingsButton)
         doctorText = findViewById(R.id.doctorEmail)
         if (username != "Login non effettuato"){
             usernameView.setText(username)
@@ -87,23 +85,6 @@ class SettingsActivity : AppCompatActivity() {
 
             }
         })
-
-        buttonAccedi.setOnClickListener(object: View.OnClickListener{
-            override fun onClick(p0: View?) {
-
-            }
-        })
-
-        /*
-        doctorText.setOnFocusChangeListener(object : View.OnFocusChangeListener {
-            override fun onFocusChange(v: View?, hasFocus: Boolean) {
-                if(!hasFocus) {
-                    emailDoctor = doctorText.text.toString()
-                    PreferenceManager.getDefaultSharedPreferences(this@SettingsActivity).edit().putString("emaildoctor", emailDoctor).apply()
-                }
-
-            }
-        }) */
 
         doctorText.setOnEditorActionListener(object: OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {

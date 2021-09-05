@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PillsActivity"
-    android:background="@drawable/invbackground">
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbarContact"
         android:layout_width="414dp"
         android:layout_height="57dp"
         android:background="?attr/colorPrimary"
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Gestione inventario pillole"
+            android:text="Contatti"
             android:paddingRight="30dp"
             android:textSize="21dp"
             android:textColor="@color/white"
@@ -34,7 +34,7 @@
 
 
     <ListView
-        android:id="@+id/listInv"
+        android:id="@+id/listContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
@@ -42,7 +42,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -52,6 +52,6 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="25dp"
         android:src="@drawable/ic_baseline_add"
-        app:backgroundTint="#CC3C6A" />
+        app:backgroundTint="#2196F3" />
 
 </RelativeLayout>
