@@ -86,7 +86,7 @@ class PillsActivity : AppCompatActivity() {
                 var adapter = MyAdapter()
                 listViewInv = findViewById(R.id.listInv)
                 listViewInv.adapter = adapter
-                tuttoIlProgramma()
+                display()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -99,7 +99,7 @@ class PillsActivity : AppCompatActivity() {
 
     }
 
-    fun tuttoIlProgramma() {
+    fun display() {
         var floatingButton: FloatingActionButton = findViewById(R.id.fab)
         floatingButton.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
