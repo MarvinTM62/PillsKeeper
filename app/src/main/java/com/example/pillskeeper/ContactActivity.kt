@@ -2,6 +2,7 @@ package com.example.pillskeeper
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -9,17 +10,21 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import java.io.ByteArrayOutputStream
+import java.util.jar.Manifest
 
 class ContactActivity : AppCompatActivity() {
 
@@ -37,6 +42,7 @@ class ContactActivity : AppCompatActivity() {
     lateinit var textViewContact: TextView
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
+    var positionGlobal: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,6 +137,7 @@ class ContactActivity : AppCompatActivity() {
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            positionGlobal = position
             val convertViewContact = layoutInflater.inflate(R.layout.itempersone, parent, false)
             val textViewContact: TextView = convertViewContact.findViewById(R.id.nomePersonaText)
             textViewContact.text = ContactName[position] + " " + ContactSurname[position]
@@ -153,7 +160,7 @@ class ContactActivity : AppCompatActivity() {
                     dialog.show()
                     val window: Window? = dialog.getWindow()
                     if (window != null) {
-                        window.setLayout(1000, 760)
+                        window.setLayout(1000, 800)
                     }
                 }
             })
@@ -178,8 +185,38 @@ class ContactActivity : AppCompatActivity() {
                         .setNegativeButton("Annulla", null).show()
                 }
             })
+
+            val sendSms = convertViewContact.findViewById<ImageButton>(R.id.sendMessage)
+            sendSms.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    if (ContextCompat.checkSelfPermission(this@ContactActivity, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED ){
+                        sendMessage()
+                    }
+                    else{ActivityCompat.requestPermissions(this@ContactActivity, arrayOf(android.Manifest.permission.SEND_SMS), 100)}
+                }
+            })
+
             return convertViewContact
-}
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 100 && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            sendMessage()
+        } else{Toast.makeText(this@ContactActivity, "Permessi rifiutati", Toast.LENGTH_SHORT).show()}
+    }
+
+    private fun sendMessage() {
+
+        if (ContactNumber[positionGlobal] != ""){
+            var smsManager: SmsManager = SmsManager.getDefault()
+            smsManager.sendTextMessage(ContactNumber[positionGlobal], null, "prova", null , null)
+            Toast.makeText(this@ContactActivity, "messaggio inviato", Toast.LENGTH_SHORT).show()
+        }
+
+        else {Toast.makeText(this@ContactActivity, "il numero non è stato indicato", Toast.LENGTH_SHORT).show()}
+
     }
 
 }
