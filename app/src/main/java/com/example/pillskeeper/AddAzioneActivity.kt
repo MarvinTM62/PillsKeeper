@@ -25,7 +25,7 @@ class AddAzioneActivity : AppCompatActivity() {
 
         creaCanaleNotifica()
 
-        val calendar: Calendar = Calendar.getInstance()
+        var calendar: Calendar = Calendar.getInstance()
         val oraLocale = calendar.get(Calendar.HOUR_OF_DAY)
         var oraPicked = oraLocale + 1
         val oraPicker2 = findViewById<NumberPicker>(R.id.oraPicker2)

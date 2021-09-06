@@ -1,7 +1,9 @@
 package com.example.pillskeeper
 
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -21,8 +23,9 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 class AddReminderActivity : AppCompatActivity() {
-    private val CHANNEL_ID = "channel_id"
-    private val notificationID = 101
+    val CHANNEL_ID = "pillskeeper"
+    val CHANNEL_NAME = "pillskeeper_channel"
+    val notificationID = 101
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +33,7 @@ class AddReminderActivity : AppCompatActivity() {
 
         creaCanaleNotifica()
 
-        val calendar: Calendar = Calendar.getInstance()
+        var calendar: Calendar = Calendar.getInstance()
         val oraLocale = calendar.get(Calendar.HOUR_OF_DAY)
         var oraPicked = oraLocale + 1
         val oraPicker = findViewById<NumberPicker>(R.id.oraPicker)
@@ -64,7 +67,7 @@ class AddReminderActivity : AppCompatActivity() {
             val nomeFarmacoString = nomeFarmacoText.toString()
             //get nome from database farmaci
             val quantitaFarmacoText = findViewById<TextView>(R.id.quantitaFarmacoText).text
-            val quantitaFarmacoInt = quantitaFarmacoText.toString()
+            val quantitaFarmacoString = quantitaFarmacoText.toString()
             val giorniList: List<Int>
             val giorniButtonGroup = findViewById<MaterialButtonToggleGroup>(R.id.giorniButtonsGroup)
             if(nomeFarmacoText.isEmpty())
@@ -74,10 +77,10 @@ class AddReminderActivity : AppCompatActivity() {
             } else if (!nomeFarmacoText.isEmpty()){
                 val newNotifica = Notifica(nomeFarmacoString)
                 //set counter farmaci rimanenti da database
-                if(quantitaFarmacoInt.isEmpty()){
+                if(quantitaFarmacoString.isEmpty()){
                     newNotifica.setQuantitaFarmaco(0)
                 } else {
-                    newNotifica.setQuantitaFarmaco(quantitaFarmacoInt.toInt())
+                    newNotifica.setQuantitaFarmaco(quantitaFarmacoString.toInt())
                 }
                 newNotifica.setOraNotifica(oraPicked)
                 newNotifica.setMinutoNotifica(minutiPicked)
@@ -107,15 +110,15 @@ class AddReminderActivity : AppCompatActivity() {
                 val sharedPrefs = SharedPreferencesNotifiche()
                 sharedPrefs.saveNotifiche(this, NotificheList.notificheList)
                 startActivity(Intent(this, ReminderActivity::class.java))
-//                var builder = NotificationCompat.Builder(this, CHANNEL_ID)
-//                    .setSmallIcon(R.drawable.icona_pills_keeper)
-//                    .setContentTitle("Prendi " + quantitaFarmaco + " " + nomeFarmacoString)
-//                    .setStyle(NotificationCompat.BigTextStyle()
-//                        .bigText("Descrizione"))
-//                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                with(NotificationManagerCompat.from(this)){
-//                    notify(notificationID, builder.build())
-//                }
+                var builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.pillola)
+                    .setContentTitle("Prendi " + quantitaFarmacoString + " " + nomeFarmacoString)
+                    .setStyle(NotificationCompat.BigTextStyle()
+                        .bigText("Descrizione"))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                with(NotificationManagerCompat.from(this)){
+                    notify(notificationID, builder.build())
+                }
 
             }
 
@@ -124,14 +127,13 @@ class AddReminderActivity : AppCompatActivity() {
 
     private fun creaCanaleNotifica(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            val nome = "Notifica PillsKeeper"
             val testoDescrizione = "Notifica della applicazione PillsKeeper"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val canale = NotificationChannel(CHANNEL_ID, nome, importance).apply {
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance).apply {
                 description = testoDescrizione
             }
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(canale)
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
     }
 

@@ -29,7 +29,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="?attr/colorPrimary"
         android:backgroundTint="#03A9F4"
@@ -76,9 +76,12 @@
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:cacheColorHint="#00FFFFFF"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
