@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorBackground">#E3F2FD</color>
     <color name="colorOntop">#00ACC1</color>
+    <color name="contactBackground">#E3F2FD</color>
 </resources>

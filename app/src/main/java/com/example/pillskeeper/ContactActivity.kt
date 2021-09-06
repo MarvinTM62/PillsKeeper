@@ -26,7 +26,7 @@ class ContactActivity : AppCompatActivity() {
     private var username: String = ""
     var ContactName: ArrayList<String> = ArrayList()
     var ContactSurname: ArrayList<String> = ArrayList()
-    var ContactNumber: ArrayList<Int> = ArrayList()
+    var ContactNumber: ArrayList<String> = ArrayList()
     var ContactEmail: ArrayList<String> = ArrayList()
     lateinit var nomeText: EditText
     lateinit var cognomeText: EditText
@@ -52,7 +52,7 @@ class ContactActivity : AppCompatActivity() {
                 for (ds in dataSnapshot.children) {
                     ContactName.add(ds.child("name").value.toString())
                     ContactSurname.add(ds.child("surname").value.toString())
-                    ContactNumber.add(ds.child("phoneNumber").value.toString().toInt())
+                    ContactNumber.add(ds.child("phoneNumber").value.toString())
                     ContactEmail.add(ds.child("email").value.toString())
                 }
                 var adapter = MyAdapter()
@@ -92,21 +92,15 @@ class ContactActivity : AppCompatActivity() {
                             Toast.makeText(this@ContactActivity, "Inserire cognome", Toast.LENGTH_SHORT ).show()
 
                         }
-                        else if(numeroText.text.toString() == "" ) {
-                            Toast.makeText(this@ContactActivity, "Inserire numero di cellulare", Toast.LENGTH_SHORT ).show()
-
+                        else if(numeroText.text.toString() == "" && emailContactText.text.toString() == "" ) {
+                            Toast.makeText(this@ContactActivity, "Inserire numero di cellulare o email", Toast.LENGTH_SHORT ).show()
                         }
-                        else if(emailContactText.text.toString() == "" ) {
-                            Toast.makeText(this@ContactActivity, "Inserire email", Toast.LENGTH_SHORT ).show()
-
-                        }
-
                         else {
                             myRef.child(username).child("contacts").child(nomeText.text.toString()+" "+cognomeText.text.toString()).setValue(Contact(nomeText.text.toString(), cognomeText.text.toString(),
-                                (numeroText.text.toString()).toInt(), emailContactText.text.toString()))
+                                numeroText.text.toString(), emailContactText.text.toString()))
                             ContactName.add(nomeText.text.toString())
                             ContactSurname.add(cognomeText.text.toString())
-                            ContactNumber.add((numeroText.text.toString()).toInt())
+                            ContactNumber.add((numeroText.text.toString()))
                             ContactEmail.add(emailContactText.text.toString())
                             listViewContact.adapter = null
                             listViewContact.adapter = MyAdapter()

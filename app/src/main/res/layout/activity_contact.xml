@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".PillsActivity"
-    android:background="@color/white">
+    android:background="@color/contactBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarContact"
