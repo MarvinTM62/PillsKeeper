@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginStart
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -27,6 +28,7 @@ class ReminderActivity : AppCompatActivity() {
     private lateinit var sab: TextView
     private lateinit var dom: TextView
     private lateinit var deleteNot: ImageButton
+    private lateinit var resetNot: ImageButton
     val sharedPrefs = SharedPreferencesNotifiche()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,14 +84,14 @@ class ReminderActivity : AppCompatActivity() {
             sab = convertView.findViewById(R.id.sabNotText)
             dom = convertView.findViewById(R.id.domNotText)
             nomeNotifica.text = NotificheList.notificheList[position].getNomeNotifica()
-            if(NotificheList.notificheList[position].getQuantitaFarmaco() == 0) {
+            if(NotificheList.notificheList[position].getQuantitaFarmaco() == -1) {
                 quantitaFarmaco.text = " "
                 counterFarmaco.text = " "
             } else {
                 quantitaFarmaco.text = "Dosi: " + NotificheList.notificheList[position].getQuantitaFarmaco()
-                counterFarmaco.text = "Rimanenti: " + NotificheList.notificheList[position].getCounterFarmaco().toString()
+                counterFarmaco.text = "Rimanenti: " + NotificheList.notificheList[position].getCounterFarmaco()
             }
-            if(NotificheList.notificheList[position].getCounterFarmaco() == 0) {
+            if(NotificheList.notificheList[position].getCounterFarmaco() == -1) {
                 counterFarmaco.text = " "
             }
             if(NotificheList.notificheList[position].getMinutoNotifica() <= 9) {
@@ -119,6 +121,10 @@ class ReminderActivity : AppCompatActivity() {
                 dom.text = " "
             }
             deleteNot = convertView.findViewById(R.id.deleteNot)
+            resetNot = convertView.findViewById(R.id.resetNot)
+            if(!NotificheList.notificheList[position].isFarmaco()){
+                resetNot.setVisibility(View.INVISIBLE)
+            }
             deleteNot.setOnClickListener {
                 AlertDialog.Builder(this@ReminderActivity)
                     .setTitle("Elimina notifica")
@@ -134,6 +140,31 @@ class ReminderActivity : AppCompatActivity() {
                         Toast.makeText(this@ReminderActivity, "Eliminazione avvenuta con successo", Toast.LENGTH_SHORT).show()
                     }
                     .setNegativeButton("Annulla", null).show()
+            }
+            if(NotificheList.notificheList[position].isFarmaco()) {
+                resetNot.setOnClickListener {
+                    AlertDialog.Builder(this@ReminderActivity)
+                        .setTitle("Reset dosi rimanenti")
+                        .setMessage("Vuoi resettare il numero di dosi rimanenti?")
+                        .setIcon(R.drawable.ic_baseline_warning)
+                        .setPositiveButton("Sì") { dialog, whichButton ->
+                            NotificheList.notificheList[position].resetCounterFarmaco()
+                            sharedPrefs.saveNotifiche(
+                                this@ReminderActivity,
+                                NotificheList.notificheList
+                            )
+                            var adapter = NotificaAdapter(this@ReminderActivity, NotificheList.notificheList)
+                            var listView: ListView = findViewById(R.id.notificheListView)
+                            adapter.notifyDataSetChanged()
+                            listView.invalidateViews()
+                            Toast.makeText(
+                                this@ReminderActivity,
+                                "Reset avvenuto con successo",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .setNegativeButton("Annulla", null).show()
+                }
             }
 
             return convertView

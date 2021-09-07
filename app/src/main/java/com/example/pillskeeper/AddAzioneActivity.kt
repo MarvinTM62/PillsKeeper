@@ -16,8 +16,8 @@ import java.util.*
 
 class AddAzioneActivity : AppCompatActivity() {
 
-    private val CHANNEL_ID = "channel_id"
-    private val notificationID = 101
+    val CHANNEL_ID = "pillskeeper"
+    val CHANNEL_NAME = "pillskeeper_channel"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +61,8 @@ class AddAzioneActivity : AppCompatActivity() {
                 Toast.makeText(this@AddAzioneActivity, "Selezionare azione", Toast.LENGTH_SHORT).show()
             if (giorniButtonGroup2.checkedButtonIds.isEmpty()) {
                 Toast.makeText(this@AddAzioneActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
-            } else if (!nomeAzioneText.isEmpty()){
-                val newNotifica = Notifica(nomeAzioneString)
+            } else if (!nomeAzioneText.isEmpty() && !giorniButtonGroup2.checkedButtonIds.isEmpty()){
+                val newNotifica = Notifica(nomeAzioneString, false)
                 newNotifica.setOraNotifica(oraPicked)
                 newNotifica.setMinutoNotifica(minutiPicked)
                 giorniList = giorniButtonGroup2.checkedButtonIds
@@ -89,23 +89,23 @@ class AddAzioneActivity : AppCompatActivity() {
                 }
                 NotificheList.notificheList.add(newNotifica)
                 val sharedPrefs = SharedPreferencesNotifiche()
+                newNotifica.broadcastNotifica(this, intent)
                 sharedPrefs.saveNotifiche(this, NotificheList.notificheList)
                 startActivity(Intent(this, ReminderActivity::class.java))
             }
         }
 
     }
-    private fun creaCanaleNotifica() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val nome = "Notifica PillsKeeper"
-            val testoDescrizione = "Notifica della applicazione PillsKeeper"
+
+    private fun creaCanaleNotifica(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val testoDescrizione = "Notifica dell'applicazione PillsKeeper"
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val canale = NotificationChannel(CHANNEL_ID, nome, importance).apply {
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance).apply {
                 description = testoDescrizione
             }
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(canale)
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
         }
     }
 }
