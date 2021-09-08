@@ -1,26 +1,26 @@
 package com.example.pillskeeper
 
-import android.text.Editable
-import org.w3c.dom.Text
-import android.content.Context
-import android.content.Intent
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import java.io.Serializable
 
-class Notifica(val nome: String, fOrA: Boolean){
+class Notifica(nome: String, fOrA: Boolean): Serializable {
     private val nomeNotifica = nome
+    private val notificaID = System.currentTimeMillis().toInt()
     private var isFarmaco = fOrA
     private var dosiConfezione = -1
     private var counterFarmaco = -1
     private var obbligoPrescrizione = false
-    private var contattoFarmaco = String()
+    private var contattoFarmaco = false
     private var quantitaFarmaco = -1
     private var oraNotifica = 0
     private var minutoNotifica = 0
     private var giorniNotifica = arrayOf(false, false, false, false, false, false, false)
 
     fun getNomeNotifica(): String {
-        return nome
+        return nomeNotifica
+    }
+
+    fun getNotificaID(): Int {
+        return notificaID
     }
 
     fun isFarmaco(): Boolean {
@@ -68,12 +68,16 @@ class Notifica(val nome: String, fOrA: Boolean){
         return obbligoPrescrizione
     }
 
-    fun setContattoFarmaco(contact: Contact){
-        contattoFarmaco = contact.email
+    fun setStatoContattoFarmaco(){
+        contattoFarmaco = true
     }
 
-    fun notifyContatto() {
-        //notifica il contatto che il farmaco è finito
+    fun getStatoContattoNotifica(): Boolean {
+        return contattoFarmaco
+    }
+
+    fun notifyContatti() {
+        //notifica i contatti che il farmaco è finito
     }
 
     fun setOraNotifica(o: Int){
@@ -99,53 +103,5 @@ class Notifica(val nome: String, fOrA: Boolean){
     fun getGiorniNotifica(g: Int): Boolean {
        return giorniNotifica[g]
     }
-
-
-    fun broadcastNotifica(context: Context, intent: Intent){
-        val builder = NotificationCompat.Builder(context, "pillskeeper")
-            .setSmallIcon(R.drawable.pillola)
-                if(!isFarmaco) {
-                    builder.setContentTitle(nomeNotifica)
-                    if(minutoNotifica <= 9){
-                        builder.setStyle(NotificationCompat.BigTextStyle()
-                            .bigText("Ricordati di " + nomeNotifica + " alle " + oraNotifica + ":0" + minutoNotifica + "."))
-                    } else{
-                        builder.setStyle(NotificationCompat.BigTextStyle()
-                            .bigText("Ricordati di " + nomeNotifica + " alle " + oraNotifica + ":" + minutoNotifica + "."))
-                    }
-                } else {
-                    builder.setContentTitle("Prendi " + quantitaFarmaco + " " + nomeNotifica)
-                    removeQuantitaDaCounter()
-                    if(minutoNotifica <= 9){
-                        builder.setStyle(NotificationCompat.BigTextStyle()
-                            .bigText("Ricordati di prendere " + quantitaFarmaco + " " + nomeNotifica + " alle " + oraNotifica + ":0" + minutoNotifica + "."))
-                    } else {
-                        builder.setStyle(NotificationCompat.BigTextStyle()
-                            .bigText("Ricordati di prendere " + quantitaFarmaco + " " + nomeNotifica + " alle " + oraNotifica + ":" + minutoNotifica + "."))
-                    }
-                    if(farmacoFinitoNotifica()){
-                        val builder2 = NotificationCompat.Builder(context, "pillskeeper")
-                            .setSmallIcon(R.drawable.pillola)
-                            .setContentTitle(nomeNotifica + " è quasi finito/a.")
-                                if(contattoFarmaco.isEmpty()){
-                                    builder2.setStyle(NotificationCompat.BigTextStyle()
-                                        .bigText("Ricordati di prendere un'altra confezione e resettare la notifica."))
-                                } else {
-                                    builder2.setStyle(NotificationCompat.BigTextStyle()
-                                        .bigText(contattoFarmaco + " è stato/a avvisato/a. Ricordati di resettare la notifica all'arrivo della nuova confezione."))
-                                    notifyContatto()
-                                }
-                        builder2.setPriority(NotificationCompat.PRIORITY_HIGH)
-                        val notificationManager2 = NotificationManagerCompat.from(context)
-                        notificationManager2.notify(System.currentTimeMillis().toInt(), builder2.build())
-                    }
-
-                }
-            builder.setPriority(NotificationCompat.PRIORITY_HIGH)
-        val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(System.currentTimeMillis().toInt(), builder.build())
-
-    }
-
 
 }

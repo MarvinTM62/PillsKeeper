@@ -1,6 +1,7 @@
 package com.example.pillskeeper
 
 import android.app.AlertDialog
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,9 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginStart
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class ReminderActivity : AppCompatActivity() {
 
@@ -131,6 +129,9 @@ class ReminderActivity : AppCompatActivity() {
                     .setMessage("Vuoi eliminare la notifica definitivamente?")
                     .setIcon(R.drawable.ic_baseline_warning)
                     .setPositiveButton("Sì") { dialog, whichButton ->
+                        val intent = Intent(this@ReminderActivity, BroadcastNotifica::class.java)
+                        val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                        pendingIntent.cancel()
                         NotificheList.notificheList.remove(NotificheList.notificheList[position])
                         sharedPrefs.saveNotifiche(this@ReminderActivity, NotificheList.notificheList)
                         var adapter = NotificaAdapter(this@ReminderActivity, NotificheList.notificheList)
