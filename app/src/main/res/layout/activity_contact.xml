@@ -32,6 +32,16 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <ImageButton
+        android:id="@+id/sendToAll"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginTop="14dp"
+        android:src="@drawable/ic_baseline_contact_mail_all"
+        android:background="#0B5D9C"
+        android:scaleType="fitCenter"/>
 
     <ListView
         android:id="@+id/listContact"

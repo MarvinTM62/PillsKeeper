@@ -46,14 +46,14 @@
             android:scaleType="fitCenter"/>
 
         <ImageButton
-            android:id="@+id/sendMessage"
+            android:id="@+id/sendEmailToOne"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center|end"
             android:layout_margin="105dp"
             android:contentDescription="@string/app_name"
             android:background="@color/white"
-            android:src="@drawable/ic_baseline_sms"
+            android:src="@drawable/ic_baseline_email_to_one"
             android:scaleType="fitCenter"/>
 
         <TextView

@@ -2,6 +2,7 @@ package com.example.pillskeeper
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -48,6 +49,24 @@ class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
+
+        //Information dialog for first launch
+        if(PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).getBoolean("FirstActivityStart", true)) {
+            var dialogInfo: Dialog = Dialog(this@ContactActivity)
+            dialogInfo.setContentView(R.layout.dialog_contact_first_launch)
+            val buttonOk: Button = dialogInfo.findViewById<Button>(R.id.button_ok)
+            buttonOk.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    dialogInfo.dismiss()
+                }
+            })
+            dialogInfo.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogInfo.show()
+            val windowInfo: Window? = dialogInfo.getWindow()
+            if (windowInfo != null) {
+                windowInfo.setLayout(1000, 1000)}
+            PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).edit().putBoolean("FirstActivityStart", false).apply()
+        }
 
         username = PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).getString("username", "Login non effettuato")!!
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -186,37 +205,20 @@ class ContactActivity : AppCompatActivity() {
                 }
             })
 
-            val sendSms = convertViewContact.findViewById<ImageButton>(R.id.sendMessage)
-            sendSms.setOnClickListener(object: View.OnClickListener{
+            val sendEmailToOne = convertViewContact.findViewById<ImageButton>(R.id.sendEmailToOne)
+            sendEmailToOne.setOnClickListener(object: View.OnClickListener{
                 override fun onClick(p0: View?) {
-                    if (ContextCompat.checkSelfPermission(this@ContactActivity, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED ){
-                        sendMessage()
-                    }
-                    else{ActivityCompat.requestPermissions(this@ContactActivity, arrayOf(android.Manifest.permission.SEND_SMS), 100)}
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.putExtra(Intent.EXTRA_EMAIL, ContactEmail[position])
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
+                    intent.putExtra(Intent.EXTRA_TEXT, "Prova")
+                    intent.type = "message/rfc822"
+                    startActivity(Intent.createChooser(intent, "Scegli l'email client"))
                 }
             })
 
             return convertViewContact
         }
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 100 && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            sendMessage()
-        } else{Toast.makeText(this@ContactActivity, "Permessi rifiutati", Toast.LENGTH_SHORT).show()}
-    }
-
-    private fun sendMessage() {
-
-        if (ContactNumber[positionGlobal] != ""){
-            var smsManager: SmsManager = SmsManager.getDefault()
-            smsManager.sendTextMessage(ContactNumber[positionGlobal], null, "prova", null , null)
-            Toast.makeText(this@ContactActivity, "messaggio inviato", Toast.LENGTH_SHORT).show()
-        }
-
-        else {Toast.makeText(this@ContactActivity, "il numero non è stato indicato", Toast.LENGTH_SHORT).show()}
-
     }
 
 }
