@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class EmailActivity : AppCompatActivity() {
@@ -34,13 +36,29 @@ class EmailActivity : AppCompatActivity() {
             }
         })
 
+        var arrayList: ArrayList<String>
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this@EmailActivity)
+        val emptyList = Gson().toJson(ArrayList<String>())
+        var json2 = preferenceManager.getString("pillsExpired", emptyList)
+        val gson2 = Gson()
+        val type = object : TypeToken<ArrayList<String>>() {}.type
+        arrayList = gson2.fromJson(json2, type)
+        var pills: String = ""
+        for(pill in arrayList) {
+            pills += "$pill, "
+        }
+        if(!arrayList.isEmpty()) {
+            pills = pills.substring(0, pills.length-2)
+        } else {
+            pills = "\"al momento non ci sono pillole scadute\""
+        }
         mEditTextTo = findViewById(R.id.edit_text_to)
         mEditTextSubject = findViewById(R.id.edit_text_subject)!!
         mEditTextMessage = findViewById(R.id.edit_text_message)!!
         mEditTextTo.setText(PreferenceManager.getDefaultSharedPreferences(this@EmailActivity).getString("emaildoctor", ""))
         mEditTextSubject.setText("Prescrizione nuovi medicinali")
         mEditTextMessage.setText("Buongiorno, avrei bisogno dei seguenti medicinali: " +
-                "\"indicare i medicinali\"" + ".\nGrazie mille, buona giornata.")
+                pills + ".\nGrazie mille, buona giornata.")
 
         val buttonSend = findViewById<Button>(R.id.button_send)
         buttonSend.setOnClickListener {

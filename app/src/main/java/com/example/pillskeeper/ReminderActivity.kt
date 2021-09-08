@@ -5,11 +5,14 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class ReminderActivity : AppCompatActivity() {
 
@@ -149,6 +152,21 @@ class ReminderActivity : AppCompatActivity() {
                         .setMessage("Vuoi resettare il numero di dosi rimanenti?")
                         .setIcon(R.drawable.ic_baseline_warning)
                         .setPositiveButton("Sì") { dialog, whichButton ->
+                            var arrayList: ArrayList<String>
+                            val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
+                            val emptyList = Gson().toJson(ArrayList<String>())
+                            var json2 = preferenceManager.getString("pillsExpired", emptyList)
+                            val gson2 = Gson()
+                            val type = object : TypeToken<ArrayList<String>>() {}.type
+                            arrayList = gson2.fromJson(json2, type)
+                            arrayList.remove(NotificheList.notificheList[position].getNomeNotifica())
+                            val gson = Gson()
+                            var json = gson.toJson(arrayList)
+                            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+                            var editor = sharedPreferences.edit()
+                            editor.putString("pillsExpired", json)
+                            editor.apply()
+
                             NotificheList.notificheList[position].resetCounterFarmaco()
                             sharedPrefs.saveNotifiche(
                                 this@ReminderActivity,

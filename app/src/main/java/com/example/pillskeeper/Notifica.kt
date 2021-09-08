@@ -1,5 +1,11 @@
 package com.example.pillskeeper
 
+import android.telephony.SmsManager
+import android.util.Log
+import androidx.core.content.ContextCompat
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.io.Serializable
 
 class Notifica(nome: String, fOrA: Boolean): Serializable {
@@ -76,8 +82,29 @@ class Notifica(nome: String, fOrA: Boolean): Serializable {
         return contattoFarmaco
     }
 
-    fun notifyContatti() {
-        //notifica i contatti che il farmaco è finito
+    fun notifyContatti(username: String) {
+        var database: FirebaseDatabase = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
+        var myRef: DatabaseReference = database.getReference("user")
+        var contactNumber: ArrayList<String> = ArrayList<String>()
+        val eventListener: ValueEventListener = object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    var number = ds.child("phoneNumber").value.toString()
+                    if(number != "")
+                        contactNumber.add(number)
+                }
+                for(number in contactNumber) {
+                    var smsManager: SmsManager = SmsManager.getDefault()
+                    smsManager.sendTextMessage(number, null,
+                        "Ciao, sta per scadere la confezione del seguente farmaco: $nomeNotifica.\n Grazie!", null , null)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.message)
+            }
+        }
+        myRef.child(username).child("contacts").addListenerForSingleValueEvent(eventListener)
     }
 
     fun setOraNotifica(o: Int){

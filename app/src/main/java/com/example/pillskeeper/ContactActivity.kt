@@ -24,6 +24,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.io.ByteArrayOutputStream
 import java.util.jar.Manifest
 
@@ -100,10 +102,30 @@ class ContactActivity : AppCompatActivity() {
                     if (email != "") {recipientsList += "$email, "}
                 }
                 val recipients = recipientsList.split(",").toTypedArray()
+
+                var arrayList2: ArrayList<String>
+                val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this@ContactActivity)
+                val emptyList = Gson().toJson(ArrayList<String>())
+                var json = preferenceManager.getString("pillsExpired", emptyList)
+                val gson = Gson()
+                val type = object : TypeToken<ArrayList<String>>() {}.type
+                arrayList2 = gson.fromJson(json, type)
+                var pills: String = ""
+                for(pill in arrayList2) {
+                    pills += "$pill, "
+                }
+                if(!arrayList2.isEmpty()) {
+                    pills = pills.substring(0, pills.length-2)
+                } else {
+                    pills = "\"al momento non ci sono pillole scadute\""
+                }
+                var bodyEmail: String =
+                    "Ciao, stanno per scadere le confezioni dei seguenti farmaci: $pills.\n Grazie!"
+
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients)
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
-                intent.putExtra(Intent.EXTRA_TEXT, "Prova")
+                intent.putExtra(Intent.EXTRA_TEXT, pills)
                 intent.type = "message/rfc822"
                 startActivity(Intent.createChooser(intent, "Scegli l'email client"))
             }
@@ -237,11 +259,29 @@ class ContactActivity : AppCompatActivity() {
                         Toast.makeText(this@ContactActivity, "L'e-mail per " + ContactName[position] + " non è stata indicata", Toast.LENGTH_SHORT).show()
                         return
                     }
+                    var arrayList: ArrayList<String>
+                    val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this@ContactActivity)
+                    val emptyList = Gson().toJson(ArrayList<String>())
+                    var json2 = preferenceManager.getString("pillsExpired", emptyList)
+                    val gson2 = Gson()
+                    val type = object : TypeToken<ArrayList<String>>() {}.type
+                    arrayList = gson2.fromJson(json2, type)
+                    var pills: String = ""
+                    for(pill in arrayList) {
+                        pills += "$pill, "
+                    }
+                    if(!arrayList.isEmpty()) {
+                        pills = pills.substring(0, pills.length-2)
+                    } else {
+                        pills = "\"al momento non ci sono pillole scadute\""
+                    }
+                    var bodyEmail: String =
+                        "Ciao, stanno per scadere le confezioni dei seguenti farmaci: $pills.\n Grazie!"
                     val intent = Intent(Intent.ACTION_SEND)
                     val recipient = ContactEmail[position].split(",").toTypedArray()
                     intent.putExtra(Intent.EXTRA_EMAIL, recipient)
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
-                    intent.putExtra(Intent.EXTRA_TEXT, "Prova")
+                    intent.putExtra(Intent.EXTRA_TEXT, bodyEmail)
                     intent.type = "message/rfc822"
                     startActivity(Intent.createChooser(intent, "Scegli l'email client"))
                 }

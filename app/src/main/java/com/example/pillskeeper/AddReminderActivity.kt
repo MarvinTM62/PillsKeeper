@@ -3,28 +3,45 @@ package com.example.pillskeeper
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.widget.*
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 
 class AddReminderActivity : AppCompatActivity() {
     val CHANNEL_ID = "pillskeeper"
     val CHANNEL_NAME = "pillskeeper_channel"
+    var username: String = ""
+    lateinit var database: FirebaseDatabase
+    lateinit var myRef: DatabaseReference
+    var pillsList: ArrayList<String> = ArrayList<String>()
+    var pillsQuantity: ArrayList<String> = ArrayList<String>()
+    var oraPicked: Int = 0
+    var minutiPicked: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
+        username = PreferenceManager.getDefaultSharedPreferences(this@AddReminderActivity).getString("username", "Login non effettuato")!!
+        database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
+        myRef = database.getReference("user")
 
         creaCanaleNotifica()
 
         var calendar: Calendar = Calendar.getInstance()
         val oraLocale = calendar.get(Calendar.HOUR_OF_DAY)
-        var oraPicked = oraLocale + 1
+        oraPicked = oraLocale + 1
         val oraPicker = findViewById<NumberPicker>(R.id.oraPicker)
         if (oraPicker != null) {
             oraPicker.minValue = 0
@@ -35,7 +52,7 @@ class AddReminderActivity : AppCompatActivity() {
         }
 
         val minutoLocale = calendar.get(Calendar.MINUTE)
-        var minutiPicked = minutoLocale + 1
+        minutiPicked = minutoLocale + 1
         val minutiPicker = findViewById<NumberPicker>(R.id.minutiPicker)
         if (minutiPicker != null) {
             minutiPicker.minValue = 0
@@ -49,10 +66,29 @@ class AddReminderActivity : AppCompatActivity() {
             minutiPicker.setOnValueChangedListener { numberPicker, i, i2 -> minutiPicked = i2 }
         }
 
-        //setOnClicklistener per selezionare farmaco e prendere stringa e quantita confezione
+
+        val eventListener: ValueEventListener = object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    var pillsInformation = ds.value.toString()
+                    pillsInformation = pillsInformation.substring(1, pillsInformation.length-1)
+                    var informationSplit = pillsInformation.split(",")
+                    pillsQuantity.add(informationSplit[0].substring(7))
+                    pillsList.add(informationSplit[1].substring(6))
+                }
+                display()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.d("TAG", databaseError.message)
+            }
+        }
+        myRef.child(username).child("pills").addListenerForSingleValueEvent(eventListener)
         //val nome = etc
         //val confezione = etc
+    }
 
+    private fun display() {
         val bottoneCreaNotifica: View = findViewById(R.id.bottoneCreaNotifica)
         bottoneCreaNotifica.setOnClickListener{
             val nomeFarmacoText = findViewById<TextView>(R.id.nomeFarmacoNotificaText).text
