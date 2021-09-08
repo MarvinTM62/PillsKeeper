@@ -37,11 +37,11 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="29dp"
         android:layout_marginTop="14dp"
-        android:src="@drawable/ic_baseline_contact_mail_all"
+        android:layout_marginEnd="29dp"
         android:background="#0B5D9C"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_contact_mail_all" />
 
     <ListView
         android:id="@+id/listContact"

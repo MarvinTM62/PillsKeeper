@@ -4,31 +4,33 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_add_inv.xml" value="0.3828125" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_ok.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_photo.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_reg.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_send.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/button_settings.xml" value="0.3828125" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/contactdialogborder.xml" value="0.3828125" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/dialoginfo.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/ic_baseline_sendmessage.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/ic_baseline_sms.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/invbackground.xml" value="0.3828125" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_add_reminder.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_contact.xml" value="0.33" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_email.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_google_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_main.xml" value="0.24909420289855072" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.33" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_reminder.xml" value="0.24139492753623187" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.33" />
+        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/contactpopup.xml" value="0.2346014492753623" />
-        <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/dialog_contact_first_launch.xml" value="0.33" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/imagepopup.xml" value="0.23278985507246377" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/itemcontact.xml" value="0.23278985507246377" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/itemfarmaci.xml" value="0.33" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/iteminv.xml" value="0.33" />
         <entry key="..\:/Users/Gabriele/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/itempersone.xml" value="0.33" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/contactbackground.xml" value="0.2703125" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/contactdialogborder.xml" value="0.2703125" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/drawable/invbackground.xml" value="0.2703125" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_contact.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_pills2.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/activity_settings.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/altie/AndroidStudioProjects/PillsKeeper/app/src/main/res/layout/contactpopup.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/altie/StudioProjects/PillsKeeper/app/src/main/res/drawable/invbackground.xml" value="0.2703125" />
         <entry key="..\:/Users/altie/StudioProjects/PillsKeeper/app/src/main/res/drawable/round_corner_doctor.xml" value="0.2703125" />
         <entry key="..\:/Users/altie/StudioProjects/PillsKeeper/app/src/main/res/layout/activity_google_maps.xml" value="0.264" />

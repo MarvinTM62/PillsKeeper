@@ -51,7 +51,7 @@ class ContactActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact)
 
         //Information dialog for first launch
-        if(PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).getBoolean("FirstActivityStart", true)) {
+        if(PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).getBoolean("FirstActivityStarts", true)) {
             var dialogInfo: Dialog = Dialog(this@ContactActivity)
             dialogInfo.setContentView(R.layout.dialog_contact_first_launch)
             val buttonOk: Button = dialogInfo.findViewById<Button>(R.id.button_ok)
@@ -65,7 +65,7 @@ class ContactActivity : AppCompatActivity() {
             val windowInfo: Window? = dialogInfo.getWindow()
             if (windowInfo != null) {
                 windowInfo.setLayout(1000, 1000)}
-            PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).edit().putBoolean("FirstActivityStart", false).apply()
+            PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).edit().putBoolean("FirstActivityStarts", false).apply()
         }
 
         username = PreferenceManager.getDefaultSharedPreferences(this@ContactActivity).getString("username", "Login non effettuato")!!
@@ -91,6 +91,22 @@ class ContactActivity : AppCompatActivity() {
             }
         }
         myRef.child(username).child("contacts").addListenerForSingleValueEvent(eventListener)
+
+        val sendEmailToAll = findViewById<ImageButton>(R.id.sendToAll)
+        sendEmailToAll.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(view: View?) {
+                var recipients: String = ""
+                for(email in ContactEmail) {
+                    recipients = "$email, "
+                }
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_EMAIL, recipients)
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
+                intent.putExtra(Intent.EXTRA_TEXT, "Prova")
+                intent.type = "message/rfc822"
+                startActivity(Intent.createChooser(intent, "Scegli l'email client"))
+            }
+        })
     }
 
 
@@ -98,6 +114,14 @@ class ContactActivity : AppCompatActivity() {
         var floatingButtonContact: FloatingActionButton = findViewById(R.id.fabContact)
         floatingButtonContact.setOnClickListener(object: View.OnClickListener{
             override fun onClick(p0: View?) {
+                if (username == "Login non effettuato"){
+                    val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@ContactActivity)
+                    permissionAllert.setTitle("Login non effettuato!")
+                    permissionAllert.setMessage("Per poter usare questa funzione devi effettuare il login o la registrazione nelle impostazioni")
+                    permissionAllert.setIcon(R.drawable.settings_alert)
+                    permissionAllert.create().show();
+                    return
+                }
                 var dialogContact: Dialog = Dialog(this@ContactActivity)
                 dialogContact.setContentView(R.layout.itemcontact)
 
