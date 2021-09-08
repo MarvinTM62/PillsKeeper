@@ -95,10 +95,11 @@ class ContactActivity : AppCompatActivity() {
         val sendEmailToAll = findViewById<ImageButton>(R.id.sendToAll)
         sendEmailToAll.setOnClickListener(object : View.OnClickListener{
             override fun onClick(view: View?) {
-                var recipients: String = ""
+                var recipientsList: String = ""
                 for(email in ContactEmail) {
-                    recipients = "$email, "
+                    if (email != "") {recipientsList += "$email, "}
                 }
+                val recipients = recipientsList.split(",").toTypedArray()
                 val intent = Intent(Intent.ACTION_SEND)
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients)
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
@@ -232,8 +233,13 @@ class ContactActivity : AppCompatActivity() {
             val sendEmailToOne = convertViewContact.findViewById<ImageButton>(R.id.sendEmailToOne)
             sendEmailToOne.setOnClickListener(object: View.OnClickListener{
                 override fun onClick(p0: View?) {
+                    if (ContactEmail[position] == ""){
+                        Toast.makeText(this@ContactActivity, "L'e-mail per " + ContactName[position] + " non è stata indicata", Toast.LENGTH_SHORT).show()
+                        return
+                    }
                     val intent = Intent(Intent.ACTION_SEND)
-                    intent.putExtra(Intent.EXTRA_EMAIL, ContactEmail[position])
+                    val recipient = ContactEmail[position].split(",").toTypedArray()
+                    intent.putExtra(Intent.EXTRA_EMAIL, recipient)
                     intent.putExtra(Intent.EXTRA_SUBJECT, "Farmaci in scadenza")
                     intent.putExtra(Intent.EXTRA_TEXT, "Prova")
                     intent.type = "message/rfc822"
