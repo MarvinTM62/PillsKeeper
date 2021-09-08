@@ -185,6 +185,10 @@ class ContactActivity : AppCompatActivity() {
                 dialogContact.show()
             }
         })
+        var backArrow = findViewById<ImageButton>(R.id.backArrowContatti)
+        backArrow.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
 

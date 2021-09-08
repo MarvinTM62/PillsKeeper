@@ -25,13 +25,32 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:paddingRight="30dp"
-            android:text="Gestione inventario pillole"
+            android:text="Inventario Farmaci"
             android:textColor="@color/white"
             android:textSize="21dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
 
+    <ImageButton
+        android:id="@+id/backArrowInv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.214"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ListView
         android:id="@+id/listInv"
@@ -43,15 +62,17 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_baseline_add"
-        app:backgroundTint="#CC3C6A" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/aggiungi_farmaco"
+        app:backgroundTint="#03A9F4"
+        app:fabCustomSize="70dp"
+        app:maxImageSize="35dp"
+        app:tint="#EEE" />
 
 </RelativeLayout>

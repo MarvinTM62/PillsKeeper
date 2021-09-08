@@ -169,6 +169,10 @@ class PillsActivity : AppCompatActivity() {
                 }
             }
         })
+        var backButton = findViewById<ImageButton>(R.id.backArrowInv)
+        backButton.setOnClickListener{
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
     }
 

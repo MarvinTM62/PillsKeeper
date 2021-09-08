@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:maxImageSize="35dp"
-        app:srcCompat="@drawable/aggiungi_farmaco"
+        app:srcCompat="@drawable/add_general_icon"
         app:tint="#EEE"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 

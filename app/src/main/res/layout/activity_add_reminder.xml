@@ -84,20 +84,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/quantitaFarmacoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Quantità"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nomeFarmacoNotificaText"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
         android:id="@+id/nomeFarmacoNotificaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,10 +92,39 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.041" />
+
+    <CheckBox
+        android:id="@+id/contattiCheck"
+        android:layout_width="145dp"
+        android:layout_height="52dp"
+        android:buttonTint="#8E8E8E"
+        android:text="Avviso contatti"
+        android:textColor="#676565"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantitaFarmacoText"
+        app:layout_constraintVertical_bias="0.241" />
+
+    <EditText
+        android:id="@+id/quantitaFarmacoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Quantità"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nomeFarmacoNotificaText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -123,13 +138,13 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantitaFarmacoText"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="0.99" />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/giorniButtonsGroup"
         android:layout_width="333dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="368dp"
+        android:layout_marginBottom="352dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -218,20 +233,6 @@
             app:strokeColor="#03A9F4"
             app:strokeWidth="2dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
-
-    <CheckBox
-        android:id="@+id/contattiCheck"
-        android:layout_width="145dp"
-        android:layout_height="52dp"
-        android:buttonTint="#8E8E8E"
-        android:text="Avviso contatti"
-        android:textColor="#676565"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantitaFarmacoText"
-        app:layout_constraintVertical_bias="0.289" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
