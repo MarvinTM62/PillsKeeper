@@ -4,35 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingsActivity">
+    tools:context=".SettingsActivity"
+    android:background="@color/colorBackground">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarSettings"
+        android:layout_width="414dp"
+        android:layout_height="57dp"
+        android:background="?attr/colorPrimary"
+        android:backgroundTint="#0019FD"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp"
-        android:background="@drawable/settingsimageblue">
+        app:layout_constraintVertical_bias="0.0">
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingRight="30dp"
+            android:text="Impostazioni"
+            android:textColor="@color/white"
+            android:textSize="21dp" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/linearLayoutSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="16dp">
 
-        <Space
-            android:layout_width="7dp"
-            android:layout_height="20dp">
-
-        </Space>
 
         <TextView
             android:id="@+id/usernameTextView"
@@ -41,15 +52,10 @@
             android:text="Login non effettuato"
             android:textSize="20sp"
             android:textStyle="italic"
+            android:layout_marginStart="5dp"
             app:layout_constraintStart_toEndOf="@+id/registratibutton">
 
         </TextView>
-
-        <Space
-            android:layout_width="11dp"
-            android:layout_height="20dp">
-
-        </Space>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registratiButtonSettings"
@@ -60,18 +66,10 @@
             android:paddingRight="6dp"
             android:text="Registrati"
             android:textColor="#FFFDFD"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="15dp"
             app:layout_constraintStart_toEndOf="@+id/loginButtonSettings" />
 
-
-
-        <LinearLayout
-            android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButtonSettings"
@@ -81,20 +79,21 @@
             android:paddingLeft="6dp"
             android:paddingRight="6dp"
             android:text="LOG IN"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="15dp"
             android:textColor="#FFFDFD" />
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutSettings"
-        app:layout_constraintVertical_bias="0.913"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="0.163"
+        tools:layout_editor_absoluteX="-16dp">
 
         <ImageView
             android:layout_width="90dp"
@@ -111,15 +110,42 @@
             android:layout_margin="20dp"
             android:background="@drawable/round_corner_doctor"
             android:hint="Inserisci email dottore"
+            android:imeOptions="actionDone"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:textColor="#353535"
             android:textColorHint="#C1C1C1"
-            android:imeOptions="actionDone"
             android:textSize="17sp" />
 
     </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/settings_alert"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="@+id/toolbarSettings"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:text="@string/developed"
+        android:textColor="#8ABFBF"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/bottomMenu"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.937"
+        tools:layout_editor_absoluteX="3dp">
+
+    </TextView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomMenu"

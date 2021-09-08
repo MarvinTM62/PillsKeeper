@@ -23,11 +23,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Gestione inventario pillole"
+            android:gravity="center"
             android:paddingRight="30dp"
-            android:textSize="21dp"
+            android:text="Gestione inventario pillole"
             android:textColor="@color/white"
-            android:gravity = "center" />
+            android:textSize="21dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
