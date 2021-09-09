@@ -109,7 +109,7 @@
             android:id="@+id/richiedi_button"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="54dp"
             android:background="@drawable/button_settings"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

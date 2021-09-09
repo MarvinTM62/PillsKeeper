@@ -117,7 +117,8 @@ class ContactActivity : AppCompatActivity() {
                 if(!arrayList2.isEmpty()) {
                     pills = pills.substring(0, pills.length-2)
                 } else {
-                    pills = "\"al momento non ci sono pillole scadute\""
+                    Toast.makeText(this@ContactActivity, "Al momento non hai farmaci in scadenza", Toast.LENGTH_SHORT).show()
+                    return
                 }
                 var bodyEmail: String =
                     "Ciao, stanno per scadere le confezioni dei seguenti farmaci: $pills.\n Grazie!"
@@ -277,7 +278,8 @@ class ContactActivity : AppCompatActivity() {
                     if(!arrayList.isEmpty()) {
                         pills = pills.substring(0, pills.length-2)
                     } else {
-                        pills = "\"al momento non ci sono pillole scadute\""
+                        Toast.makeText(this@ContactActivity, "Al momento non hai farmaci in scadenza", Toast.LENGTH_SHORT).show()
+                        return
                     }
                     var bodyEmail: String =
                         "Ciao, stanno per scadere le confezioni dei seguenti farmaci: $pills.\n Grazie!"

@@ -140,6 +140,13 @@ class SettingsActivity : AppCompatActivity() {
        }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 100 && grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(this@SettingsActivity, "Permessi accettati", Toast.LENGTH_SHORT).show()
+        } else{Toast.makeText(this@SettingsActivity, "Permessi rifiutati (se si desidera cambiarli accedere alle impostazioni del telefono)", Toast.LENGTH_SHORT).show()}
+    }
+
     private fun openLoginActivity() {
         val intent: Intent = Intent(this, Login::class.java)
         startActivityForResult(intent, 1)
