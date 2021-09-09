@@ -2,6 +2,7 @@ package com.example.pillskeeper
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -17,6 +18,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.OnEditorActionListener
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -27,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var usernameView : TextView
     lateinit var buttonRegister: Button
     lateinit var buttonLogin: Button
+    lateinit var buttonRichiedi: Button
     lateinit var doctorText: EditText
     val REGISTER_ACTIVITY_REQUEST_CODE = 1
     val LOGIN_ACTIVITY_REQUEST_CODE = 2
@@ -104,6 +109,16 @@ class SettingsActivity : AppCompatActivity() {
             }
         })
 
+        buttonRichiedi = findViewById(R.id.richiedi_button)
+        buttonRichiedi.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                if (ContextCompat.checkSelfPermission(this@SettingsActivity, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED ){
+                    Toast.makeText(this@SettingsActivity, "I permessi sono già stati accettati", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    ActivityCompat.requestPermissions(this@SettingsActivity, arrayOf(android.Manifest.permission.SEND_SMS), 100)}
+            }
+        })
 
     }
 

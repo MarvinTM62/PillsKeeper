@@ -3,9 +3,12 @@ package com.example.pillskeeper
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.preference.PreferenceManager
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -51,8 +54,11 @@ class BroadcastNotifica: BroadcastReceiver() {
                             .setContentTitle(it.getNomeNotifica() + " è quasi finito/a.")
                         builder2.setStyle(NotificationCompat.BigTextStyle()
                                     .bigText("I contatti sono stati avvisati. Ricordati di resettare la notifica all'arrivo della nuova confezione."))
-                        if(username != "Login non effettuato")
-                            it.notifyContatti(username)
+                        if(username != "Login non effettuato"){
+                            if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED ){
+                                it.notifyContatti(username)
+                            }
+                        }
 
                         var arrayList: ArrayList<String>
                         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)

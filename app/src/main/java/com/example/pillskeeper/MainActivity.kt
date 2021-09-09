@@ -1,17 +1,26 @@
 package com.example.pillskeeper
 
+import android.app.Dialog
 import android.content.ClipData
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.renderscript.Sampler
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -26,6 +35,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        //Information dialog for first launch
+        if(PreferenceManager.getDefaultSharedPreferences(this@MainActivity).getBoolean("FirstSmsStart", true)) {
+            var dialogInfo: Dialog = Dialog(this@MainActivity)
+            dialogInfo.setContentView(R.layout.smspermission)
+            val buttonOk: Button = dialogInfo.findViewById<Button>(R.id.button_accetto)
+            buttonOk.setOnClickListener(object: View.OnClickListener{
+                override fun onClick(p0: View?) {
+                    if (ContextCompat.checkSelfPermission(this@MainActivity, android.Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+                        ActivityCompat.requestPermissions(this@MainActivity, arrayOf(android.Manifest.permission.SEND_SMS), 100)
+                    }
+                    dialogInfo.dismiss()
+                }
+            })
+            dialogInfo.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogInfo.show()
+            val windowInfo: Window? = dialogInfo.getWindow()
+            if (windowInfo != null) {
+                windowInfo.setLayout(1000, 1000)}
+            PreferenceManager.getDefaultSharedPreferences(this@MainActivity).edit().putBoolean("FirstSmsStart", false).apply()
+        }
 
         val buttonLayoutInv: LinearLayout = findViewById(R.id.layoutInv)
         val buttonLayoutNotify: LinearLayout = findViewById(R.id.layoutNotify)
@@ -120,5 +150,7 @@ class MainActivity : AppCompatActivity() {
         finish()
         overridePendingTransition(0, 0)
     }
+
+
 }
 
