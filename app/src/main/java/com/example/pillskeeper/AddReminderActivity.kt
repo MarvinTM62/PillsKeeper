@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.*
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -29,6 +30,8 @@ class AddReminderActivity : AppCompatActivity() {
     var pillsQuantity: ArrayList<String> = ArrayList<String>()
     var oraPicked: Int = 0
     var minutiPicked: Int = 0
+    var nome = String()
+    var confezione = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +79,14 @@ class AddReminderActivity : AppCompatActivity() {
                     pillsQuantity.add(informationSplit[0].substring(7))
                     pillsList.add(informationSplit[1].substring(6))
                 }
+                val chooseFarmaco = findViewById<FloatingActionButton>(R.id.fabChooseFarmaco)
+                chooseFarmaco.setOnClickListener {
+//                    mostra lista farmaci
+//                    seleziona farmaco
+//                    nome = pillsList[position] ?
+//                    confezione = pillsQuantity[position] ?
+                    findViewById<TextView>(R.id.nomeFarmacoNotificaText).text = nome
+                }
                 display()
             }
 
@@ -84,29 +95,26 @@ class AddReminderActivity : AppCompatActivity() {
             }
         }
         myRef.child(username).child("pills").addListenerForSingleValueEvent(eventListener)
-        //val nome = etc
-        //val confezione = etc
+
     }
 
     private fun display() {
         val bottoneCreaNotifica: View = findViewById(R.id.bottoneCreaNotifica)
         bottoneCreaNotifica.setOnClickListener{
-            val nomeFarmacoText = findViewById<TextView>(R.id.nomeFarmacoNotificaText).text
-            val nomeFarmacoString = nomeFarmacoText.toString()
+            val nomeFarmacoString = nome
 //            set nome from database farmaci
-//            val nomeFarmacoString = nome
             val quantitaFarmacoText = findViewById<TextView>(R.id.quantitaFarmacoText).text
             val quantitaFarmacoString = quantitaFarmacoText.toString()
             val contattiCheck = findViewById<CheckBox>(R.id.contattiCheck)
             val giorniList: List<Int>
             val giorniButtonGroup = findViewById<MaterialButtonToggleGroup>(R.id.giorniButtonsGroup)
-            if(nomeFarmacoText.isEmpty())
+            if(nomeFarmacoString.isEmpty())
                 Toast.makeText(this@AddReminderActivity, "Selezionare farmaco", Toast.LENGTH_SHORT).show()
             if(quantitaFarmacoText.isEmpty())
                 Toast.makeText(this@AddReminderActivity, "Impostare quantità da assumere", Toast.LENGTH_SHORT).show()
             if(giorniButtonGroup.checkedButtonIds.isEmpty()){
                 Toast.makeText(this@AddReminderActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
-            } else if (!nomeFarmacoText.isEmpty() && !quantitaFarmacoText.isEmpty() && !giorniButtonGroup.checkedButtonIds.isEmpty()){
+            } else if (!nomeFarmacoString.isEmpty() && !quantitaFarmacoText.isEmpty() && !giorniButtonGroup.checkedButtonIds.isEmpty()){
                 val newNotifica = Notifica(nomeFarmacoString, true)
 //                set dosi confezione da database
 //                newNotifica.setCounterFarmaco(confezione)

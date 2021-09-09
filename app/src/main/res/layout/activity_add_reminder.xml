@@ -33,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/giorniButtonsGroup"
         app:layout_constraintVertical_bias="1.0" />
 
+
     <NumberPicker
         android:id="@+id/minutiPicker"
         android:layout_width="66dp"
@@ -83,20 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/nomeFarmacoNotificaText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Farmaco"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.041" />
-
     <CheckBox
         android:id="@+id/contattiCheck"
         android:layout_width="145dp"
@@ -114,11 +101,12 @@
 
     <EditText
         android:id="@+id/quantitaFarmacoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="43dp"
         android:ems="10"
         android:hint="Quantità"
         android:inputType="number"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -233,6 +221,36 @@
             app:strokeColor="#03A9F4"
             app:strokeWidth="2dp" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabChooseFarmaco"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="#03A9F4"
+        android:clickable="true"
+        app:fabCustomSize="60dp"
+        app:layout_constraintEnd_toStartOf="@+id/nomeFarmacoNotificaText"
+        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/aggiungi_farmaco"
+        app:tint="#EEE"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/nomeFarmacoNotificaText"
+        android:layout_width="206dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="44dp"
+        android:hint="Seleziona Farmaco"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
