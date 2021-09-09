@@ -44,8 +44,8 @@
         android:scaleX="2"
         android:scaleY="2"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbarContact"
+        app:layout_constraintStart_toStartOf="@+id/toolbarContact"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.214"
         app:srcCompat="@drawable/abc_vector_test"
@@ -72,16 +72,15 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabContact"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/add_general_icon"
-        app:tint="#EEE"
-        app:backgroundTint="#2196F3"
-        app:fabCustomSize="70dp"
-        app:maxImageSize="35dp" />
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/ic_baseline_add"
+        app:backgroundTint="#2196F3" />
 
 </RelativeLayout>
