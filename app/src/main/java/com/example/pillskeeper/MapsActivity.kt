@@ -2,6 +2,7 @@ package com.example.pillskeeper
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.AsyncTask
@@ -13,6 +14,7 @@ import android.widget.Spinner
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -36,7 +38,7 @@ class MapsActivity : AppCompatActivity() {
     lateinit var spType: Spinner
     lateinit var btFind: Button
     lateinit var supportMapFragment: SupportMapFragment
-    lateinit var map: GoogleMap
+    var map: GoogleMap? = null
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     var currentLat: Double = 0.0
     var currentLong: Double = 0.0
@@ -83,13 +85,13 @@ class MapsActivity : AppCompatActivity() {
                 //Initialize url
                 var url: String = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" + //Url
                         "location=" + currentLat + "," + currentLong + //Location latitude and longitude
-                        "&radius=5000" + //Nearby radius
+                        "&radius=20000" + //Nearby radius
                         "&type=" + placeTypeList[i] + //Place type
                         "&sensor=true" + //Sensor
-                        "&key=" + resources.getString(R.string.google_maps_key)//Google map key
+                        "&key=" + resources.getString(R.string.google_maps_key) //Google map key
 
                 //Execute place task method to download json data
-                PlaceTask().execute(url)
+                PlaceTask().execute(url) //(Serve billing account!!!)
             }
         })
     }
@@ -114,7 +116,7 @@ class MapsActivity : AppCompatActivity() {
                                 map = googleMap
                             }
                             //Zoom current location on map
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(
                                 LatLng(currentLat, currentLong), 10F
                             ))
                         }
@@ -150,7 +152,8 @@ class MapsActivity : AppCompatActivity() {
         override fun onPostExecute(s: String?) {
             super.onPostExecute(s)
             //Execute parser task
-            ParserTask().execute(s)
+            var parser = ParserTask()
+            parser.execute(s)
         }
     }
 
@@ -182,19 +185,21 @@ class MapsActivity : AppCompatActivity() {
     }
 
     inner class ParserTask: AsyncTask<String,Integer,List<HashMap<String,String>>>() {
+
+        var mapList: List<HashMap<String, String>>? = null
+
         override fun doInBackground(vararg strings: String?): List<HashMap<String, String>>? {
             //Create json parser class
             var jsonParser: JsonParser = JsonParser()
             //Initialize hash map list
-            var mapList: List<HashMap<String, String>>? = null
             var obj: JSONObject? = null
             try {
                 //Initialize json object
-                    if(strings[0] != null) {
-                        obj = JSONObject(strings[0])
-                        //Parse json object
-                        mapList = jsonParser.parseResult(obj)
-                    }
+                if(strings[0] != null) {
+                    obj = JSONObject(strings[0])
+                    //Parse json object
+                    mapList = jsonParser.parseResult(obj)
+                }
             } catch(e: JSONException) {
                 e.printStackTrace()
             }
@@ -203,8 +208,16 @@ class MapsActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(hashMaps: List<HashMap<String, String>>?) {
+            if(map == null) {
+                val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@MapsActivity)
+                permissionAllert.setTitle("La tua posizione non è stata trovata")
+                permissionAllert.setMessage("Sembra che la tua posizione non sia visibile, assicurati di aver accettato i permessi di localizzazione")
+                permissionAllert.setIcon(R.drawable.googlemaps_icon)
+                permissionAllert.create().show();
+                return
+            }
             super.onPostExecute(hashMaps)
-            map.clear()
+            map!!.clear()
             //Use for loop
             if (hashMaps != null) {
                 for (i in hashMaps.indices) {
@@ -225,8 +238,14 @@ class MapsActivity : AppCompatActivity() {
                     //Set title
                     options.title(name)
                     //Add marker on map
-                    map.addMarker(options)
+                    map!!.addMarker(options)
                 }
+            } else {
+                val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@MapsActivity)
+                permissionAllert.setTitle("Nessun risultato trovato")
+                permissionAllert.setMessage("La ricerca non ha portato a risultati. Si ricorda che per poter usare questa funzione è necessario attivare un billing account sulla piattaforma di Google Cloud!")
+                permissionAllert.setIcon(R.drawable.googlemaps_icon)
+                permissionAllert.create().show();
             }
         }
     }

@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             dialogInfo.show()
             val windowInfo: Window? = dialogInfo.getWindow()
             if (windowInfo != null) {
-                windowInfo.setLayout(1000, 1000)}
+                windowInfo.setLayout(1000, 950)}
             PreferenceManager.getDefaultSharedPreferences(this@MainActivity).edit().putBoolean("FirstSmsStart", false).apply()
         }
 
