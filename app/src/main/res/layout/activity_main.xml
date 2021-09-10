@@ -45,11 +45,11 @@
 
             <LinearLayout
                 android:id="@+id/layoutInv"
-                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/cube_background"
+                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
@@ -78,18 +78,18 @@
 
             <LinearLayout
                 android:id="@+id/layoutNotify"
-                android:clickable="true"
                 android:layout_width="129dp"
                 android:layout_height="133dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/cube_background"
+                android:clickable="true"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="15dp"
                 app:layout_constraintDimensionRatio="H, 1:1"
-                app:layout_constraintStart_toEndOf="@+id/layoutInv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/layoutInv"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -101,9 +101,9 @@
                 <TextView
                     android:layout_width="109dp"
                     android:layout_height="28dp"
+                    android:fontFamily="@font/viga"
                     android:gravity="center"
                     android:text="Reminder"
-                    android:fontFamily="@font/viga"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 

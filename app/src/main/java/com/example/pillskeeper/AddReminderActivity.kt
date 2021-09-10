@@ -11,6 +11,7 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.recyclerview.widget.ListAdapter
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -26,8 +27,8 @@ class AddReminderActivity : AppCompatActivity() {
     var username: String = ""
     lateinit var database: FirebaseDatabase
     lateinit var myRef: DatabaseReference
-    var pillsList: ArrayList<String> = ArrayList<String>()
-    var pillsQuantity: ArrayList<String> = ArrayList<String>()
+    var pillsList: MutableList<String> = mutableListOf<String>()
+    var pillsQuantity: MutableList<Int> = mutableListOf<Int>()
     var oraPicked: Int = 0
     var minutiPicked: Int = 0
     var nome = String()
@@ -76,16 +77,26 @@ class AddReminderActivity : AppCompatActivity() {
                     var pillsInformation = ds.value.toString()
                     pillsInformation = pillsInformation.substring(1, pillsInformation.length-1)
                     var informationSplit = pillsInformation.split(",")
-                    pillsQuantity.add(informationSplit[0].substring(7))
+                    pillsQuantity.add(informationSplit[0].substring(7).toInt())
                     pillsList.add(informationSplit[1].substring(6))
                 }
                 val chooseFarmaco = findViewById<FloatingActionButton>(R.id.fabChooseFarmaco)
                 chooseFarmaco.setOnClickListener {
-//                    mostra lista farmaci
-//                    seleziona farmaco
-//                    nome = pillsList[position] ?
-//                    confezione = pillsQuantity[position] ?
-                    findViewById<TextView>(R.id.nomeFarmacoNotificaText).text = nome
+                    var pillsArray = pillsList.toTypedArray()
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this@AddReminderActivity)
+                    builder.setTitle("Seleziona Farmaco")
+                    var pillsView = ListView(this@AddReminderActivity)
+                    var pillsAdapter = ArrayAdapter(this@AddReminderActivity, android.R.layout.simple_list_item_1, android.R.id.text1, pillsArray)
+                    pillsView.adapter = pillsAdapter
+                    builder.setView(pillsView)
+                    val dialog = builder.create()
+                    dialog.show()
+                    pillsView.setOnItemClickListener { parent, view, position, id ->
+                        nome = pillsAdapter.getItem(position).toString()
+                        findViewById<TextView>(R.id.nomeFarmacoNotificaText).text = nome
+                        confezione = pillsQuantity.get(position)
+                    }
+
                 }
                 display()
             }
@@ -102,7 +113,6 @@ class AddReminderActivity : AppCompatActivity() {
         val bottoneCreaNotifica: View = findViewById(R.id.bottoneCreaNotifica)
         bottoneCreaNotifica.setOnClickListener{
             val nomeFarmacoString = nome
-//            set nome from database farmaci
             val quantitaFarmacoText = findViewById<TextView>(R.id.quantitaFarmacoText).text
             val quantitaFarmacoString = quantitaFarmacoText.toString()
             val contattiCheck = findViewById<CheckBox>(R.id.contattiCheck)
@@ -116,8 +126,7 @@ class AddReminderActivity : AppCompatActivity() {
                 Toast.makeText(this@AddReminderActivity, "Selezionare almeno un giorno", Toast.LENGTH_SHORT).show()
             } else if (!nomeFarmacoString.isEmpty() && !quantitaFarmacoText.isEmpty() && !giorniButtonGroup.checkedButtonIds.isEmpty()){
                 val newNotifica = Notifica(nomeFarmacoString, true)
-//                set dosi confezione da database
-//                newNotifica.setCounterFarmaco(confezione)
+                newNotifica.setCounterFarmaco(confezione)
                 if(!quantitaFarmacoString.isEmpty()){
                     newNotifica.setQuantitaFarmaco(quantitaFarmacoString.toInt())
                 }

@@ -72,15 +72,18 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/ic_baseline_add"
-        app:backgroundTint="#2196F3" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/add_general_icon"
+        app:backgroundTint="#0B5D9C"
+        app:fabCustomSize="70dp"
+        app:maxImageSize="35dp"
+        app:tint="#EEE" />
 
 </RelativeLayout>
