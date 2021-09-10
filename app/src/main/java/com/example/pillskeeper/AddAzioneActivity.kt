@@ -93,26 +93,32 @@ class AddAzioneActivity : AppCompatActivity() {
                 val sharedPrefs = SharedPreferencesNotifiche()
                 val intent = Intent(this, BroadcastNotifica::class.java)
                 intent.putExtra("ID", newNotifica.getNotificaID())
-                val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
                 if(newNotifica.getGiorniNotifica(0)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.MONDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(1)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.TUESDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(2)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.WEDNESDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(3)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 3, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.THURSDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(4)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 4, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.FRIDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(5)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 5, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.SATURDAY, pendingIntent)
                 }
                 if(newNotifica.getGiorniNotifica(6)) {
+                    val pendingIntent = PendingIntent.getBroadcast(this, newNotifica.getNotificaID() + 6, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                     setAllarmeGiorno(newNotifica.getOraNotifica(), newNotifica.getMinutoNotifica(), Calendar.SUNDAY, pendingIntent)
                 }
                 sharedPrefs.saveNotifiche(this, NotificheList.notificheList)
@@ -140,6 +146,8 @@ class AddAzioneActivity : AppCompatActivity() {
         calendar.set(Calendar.HOUR_OF_DAY, ora)
         calendar.set(Calendar.MINUTE, minuto)
         calendar.set(Calendar.SECOND, 0)
+        if(calendar.timeInMillis < System.currentTimeMillis())
+            calendar.add(Calendar.DAY_OF_WEEK, 7)
         val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, 7*24*60*60*1000, pendingIntent)
     }
