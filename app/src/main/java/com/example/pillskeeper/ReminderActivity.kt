@@ -149,8 +149,34 @@ class ReminderActivity : AppCompatActivity() {
                         editor.apply()
 
                         val intent = Intent(this@ReminderActivity, BroadcastNotifica::class.java)
-                        val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
-                        pendingIntent.cancel()
+                        if(NotificheList.notificheList[position].getGiorniNotifica(0)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(1)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(2)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(3)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 3, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(4)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 4, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(5)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 5, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
+                        if(NotificheList.notificheList[position].getGiorniNotifica(6)){
+                            val pendingIntent = PendingIntent.getBroadcast(this@ReminderActivity, NotificheList.notificheList[position].getNotificaID() + 6, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                            pendingIntent.cancel()
+                        }
                         NotificheList.notificheList.remove(NotificheList.notificheList[position])
                         sharedPrefs.saveNotifiche(this@ReminderActivity, NotificheList.notificheList)
                         var adapter = NotificaAdapter(this@ReminderActivity, NotificheList.notificheList)

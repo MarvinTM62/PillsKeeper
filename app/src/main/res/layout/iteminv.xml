@@ -98,14 +98,14 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/aggFarmButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_margin="50dp"
-        android:text="Aggiungi farmaco"
+        android:background="@drawable/button_add_inv"
         android:paddingLeft="6dp"
         android:paddingRight="6dp"
-        android:textSize="15sp"
+        android:text="Aggiungi farmaco"
         android:textColor="@color/white"
-        android:background="@drawable/button_add_inv">
+        android:textSize="15sp">
 
     </androidx.appcompat.widget.AppCompatButton>
 
