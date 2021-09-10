@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             dialogInfo.show()
             val windowInfo: Window? = dialogInfo.getWindow()
             if (windowInfo != null) {
-                windowInfo.setLayout(1000, 950)}
+                windowInfo.setLayout(1000, 900)}
             PreferenceManager.getDefaultSharedPreferences(this@MainActivity).edit().putBoolean("FirstSmsStart", false).apply()
         }
 
@@ -91,25 +91,11 @@ class MainActivity : AppCompatActivity() {
         })
         buttonLayoutContact.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                /* if(preferences.getBoolean("Contact permission", false) == false) {
-                    val permissionAllert3: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-                    permissionAllert3.setTitle("Permessi non attivi!")
-                    permissionAllert3.setMessage("Per poter usare questa funzione devi consentire all'applicazione di accedere ai tuoi contatti nelle impostazioni")
-                    permissionAllert3.setIcon(R.drawable.contatti_farmaco)
-                    permissionAllert3.create().show();
-                } else */
                 openContactActivity()
             }
         })
         buttonLayoutMap.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                /* if(preferences.getBoolean("Localitation permission", false) == false) {
-                    val permissionAllert4: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-                    permissionAllert4.setTitle("Permessi non attivi!")
-                    permissionAllert4.setMessage("Per poter usare questa funzione devi attivare i permessi di localizzazione nelle impostazioni")
-                    permissionAllert4.setIcon(R.drawable.googlemaps_icon)
-                    permissionAllert4.create().show();
-                } else */
                 openGoogleMapsActivity()
             }
         })
@@ -150,7 +136,6 @@ class MainActivity : AppCompatActivity() {
         finish()
         overridePendingTransition(0, 0)
     }
-
 
 }
 

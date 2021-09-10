@@ -36,6 +36,7 @@ class ContactActivity : AppCompatActivity() {
     var ContactSurname: ArrayList<String> = ArrayList()
     var ContactNumber: ArrayList<String> = ArrayList()
     var ContactEmail: ArrayList<String> = ArrayList()
+    var ContactNameOnDatabase: ArrayList<String> = ArrayList()
     lateinit var nomeText: EditText
     lateinit var cognomeText: EditText
     lateinit var numeroText: EditText
@@ -81,6 +82,7 @@ class ContactActivity : AppCompatActivity() {
                     ContactSurname.add(ds.child("surname").value.toString())
                     ContactNumber.add(ds.child("phoneNumber").value.toString())
                     ContactEmail.add(ds.child("email").value.toString())
+                    ContactNameOnDatabase.add(ds.key.toString())
                 }
                 var adapter = MyAdapter()
                 listViewContact = findViewById(R.id.listContact)
@@ -169,19 +171,13 @@ class ContactActivity : AppCompatActivity() {
                             Toast.makeText(this@ContactActivity, "Inserire numero di cellulare o email", Toast.LENGTH_SHORT ).show()
                         }
                         else {
-                            var nameCount: Int = 1
-                            var i: Int = 0
-                            for (name in ContactName){
-                                if (name == nomeText.text.toString()){
-                                    if (ContactSurname[i] == cognomeText.text.toString()){
-                                        nameCount++
-                                    }
+                            var homonymNumber: Int = 1
+                            for(name in ContactNameOnDatabase) {
+                                if(name == nomeText.text.toString()+" "+cognomeText.text.toString()+ " "+homonymNumber) {
+                                    homonymNumber++
                                 }
-
-                                i++
-
                             }
-                            myRef.child(username).child("contacts").child(nomeText.text.toString()+" "+cognomeText.text.toString() + " " + nameCount).setValue(Contact(nomeText.text.toString(), cognomeText.text.toString(),
+                            myRef.child(username).child("contacts").child(nomeText.text.toString()+" "+cognomeText.text.toString() + " " + homonymNumber).setValue(Contact(nomeText.text.toString(), cognomeText.text.toString(),
                                 numeroText.text.toString(), emailContactText.text.toString()))
                             ContactName.add(nomeText.text.toString())
                             ContactSurname.add(cognomeText.text.toString())
@@ -194,7 +190,7 @@ class ContactActivity : AppCompatActivity() {
                         }
                     }
                 })
-
+                dialogContact.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialogContact.show()
             }
         })
@@ -257,19 +253,12 @@ class ContactActivity : AppCompatActivity() {
                         .setIcon(R.drawable.ic_baseline_warning_contact)
                         .setPositiveButton("Sì") {
                                 dialog, whichButton ->
-                            var i: Int = 0
-                            var nameCount: Int = 1
-                            while(i < position) {
-                                if(ContactName[i] == ContactName[position] && ContactSurname[i] == ContactSurname[position]) {
-                                    nameCount++
-                                }
-                                i++
-                            }
-                            myRef.child(username).child("contacts").child(ContactName[position]+" "+ContactSurname[position] + " " + nameCount).removeValue()
+                            myRef.child(username).child("contacts").child(ContactNameOnDatabase[position]).removeValue()
                             ContactName.remove(ContactName[position])
                             ContactSurname.remove(ContactSurname[position])
                             ContactNumber.remove(ContactNumber[position])
                             ContactEmail.remove(ContactEmail[position])
+                            ContactNameOnDatabase.remove(ContactNameOnDatabase[position])
                             listViewContact.adapter = MyAdapter()
                             Toast.makeText(this@ContactActivity, "Eliminazione avvenuta con successo", Toast.LENGTH_SHORT).show()
                         }

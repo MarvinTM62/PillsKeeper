@@ -41,6 +41,14 @@ class AddReminderActivity : AppCompatActivity() {
         database = Firebase.database("https://pillskeeper-7e7aa-default-rtdb.europe-west1.firebasedatabase.app/")
         myRef = database.getReference("user")
 
+        if(username == "Login non effettuato") {
+            val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@AddReminderActivity)
+            permissionAllert.setTitle("Login non effettuato!")
+            permissionAllert.setMessage("Per poter usare questa funzione si consiglia di effettuare il login o la registrazione nelle impostazioni dato che i farmaci selezionabili sono presi dall'inventario (gestibile unicamente tramite un account)")
+            permissionAllert.setIcon(R.drawable.settings_alert)
+            permissionAllert.create().show();
+        }
+
         creaCanaleNotifica()
 
         var calendar: Calendar = Calendar.getInstance()
