@@ -169,7 +169,19 @@ class ContactActivity : AppCompatActivity() {
                             Toast.makeText(this@ContactActivity, "Inserire numero di cellulare o email", Toast.LENGTH_SHORT ).show()
                         }
                         else {
-                            myRef.child(username).child("contacts").child(nomeText.text.toString()+" "+cognomeText.text.toString()).setValue(Contact(nomeText.text.toString(), cognomeText.text.toString(),
+                            var nameCount: Int = 1
+                            var i: Int = 0
+                            for (name in ContactName){
+                                if (name == nomeText.text.toString()){
+                                    if (ContactSurname[i] == cognomeText.text.toString()){
+                                        nameCount++
+                                    }
+                                }
+
+                                i++
+
+                            }
+                            myRef.child(username).child("contacts").child(nomeText.text.toString()+" "+cognomeText.text.toString() + " " + nameCount).setValue(Contact(nomeText.text.toString(), cognomeText.text.toString(),
                                 numeroText.text.toString(), emailContactText.text.toString()))
                             ContactName.add(nomeText.text.toString())
                             ContactSurname.add(cognomeText.text.toString())
@@ -245,7 +257,15 @@ class ContactActivity : AppCompatActivity() {
                         .setIcon(R.drawable.ic_baseline_warning_contact)
                         .setPositiveButton("Sì") {
                                 dialog, whichButton ->
-                            myRef.child(username).child("contacts").child(ContactName[position]+" "+ContactSurname[position]).removeValue()
+                            var i: Int = 0
+                            var nameCount: Int = 1
+                            while(i < position) {
+                                if(ContactName[i] == ContactName[position] && ContactSurname[i] == ContactSurname[position]) {
+                                    nameCount++
+                                }
+                                i++
+                            }
+                            myRef.child(username).child("contacts").child(ContactName[position]+" "+ContactSurname[position] + " " + nameCount).removeValue()
                             ContactName.remove(ContactName[position])
                             ContactSurname.remove(ContactSurname[position])
                             ContactNumber.remove(ContactNumber[position])

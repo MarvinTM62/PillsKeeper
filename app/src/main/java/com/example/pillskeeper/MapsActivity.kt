@@ -211,7 +211,7 @@ class MapsActivity : AppCompatActivity() {
             if(map == null) {
                 val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@MapsActivity)
                 permissionAllert.setTitle("La tua posizione non è stata trovata")
-                permissionAllert.setMessage("Sembra che la tua posizione non sia visibile, assicurati di aver accettato i permessi di localizzazione")
+                permissionAllert.setMessage("Sembra che la tua posizione non sia stata individuata, assicurati di aver accettato i permessi di localizzazione")
                 permissionAllert.setIcon(R.drawable.googlemaps_icon)
                 permissionAllert.create().show();
                 return
@@ -220,6 +220,14 @@ class MapsActivity : AppCompatActivity() {
             map!!.clear()
             //Use for loop
             if (hashMaps != null) {
+                if(hashMaps.indices.isEmpty()){
+                    val permissionAllert: AlertDialog.Builder = AlertDialog.Builder(this@MapsActivity)
+                    permissionAllert.setTitle("Nessun risultato trovato")
+                    permissionAllert.setMessage("La ricerca non ha portato a risultati. Si ricorda che per poter usare questa funzione è necessario attivare un billing account sulla piattaforma di Google Cloud!")
+                    permissionAllert.setIcon(R.drawable.googlemaps_icon)
+                    permissionAllert.create().show();
+                }
+
                 for (i in hashMaps.indices) {
                     //Initialize hash map
                     var hashMapList: HashMap<String,String> = hashMaps.get(i)

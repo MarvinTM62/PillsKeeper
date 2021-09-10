@@ -152,6 +152,11 @@ class PillsActivity : AppCompatActivity() {
                             val dataByte = baos.toByteArray()
                             storageReference.child(username).child(farmName.text.toString()).putBytes(dataByte)
                             myRef.child(username).child("pills").child(farmName.text.toString()).setValue(Pill(farmName.text.toString(), (pillsNumber.text.toString()).toInt()))
+                            if (pillsName.contains(farmName.text.toString())){
+                                var positionPill = pillsName.indexOf(farmName.text.toString())
+                                pillsName.removeAt(positionPill)
+                                pillsImage.removeAt(positionPill)
+                            }
                             pillsName.add(farmName.text.toString())
                             pillsImage.add(captureImage)
                             listViewInv.adapter = null
